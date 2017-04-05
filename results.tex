@@ -95,19 +95,29 @@ which is respectively 14.1 and 9.8 times higher than the next most important fac
     % \begin{tabular}{lS}
     \begin{tabular}{cccc}
         \toprule
+        % Parameter & \parbox{4cm}{\centering Average relative impact on mass flow [\si{\percent}]} & \parbox{4cm}{\centering Average relative impact on pressure [\si{\percent}]} & \parbox{4cm}{\centering Average impact on temperature [\si{\celsius}]} \\
         Parameter & \parbox{3.3cm}{\centering Average relative impact on \\ mass flow [\si{\percent}]} & \parbox{3.3cm}{\centering Average relative impact on \\ pressure [\si{\percent}]} & \parbox{3.3cm}{\centering Average impact on temperature [\si{\percent}]} \\
         \midrule
         % output from Python script goes here
+        % $Z$ & \greenbox{0.8058} & \greenbox{1.9431} & 0.0925 \\
+        % $\eval{\partial Z/\partial p}_T$ & \yellowbox{0.1769} & 0.0483 & 0.0371 \\
+        % $\eval{\partial Z/\partial T}_p$ & 0.1414 & 0.0562 & 0.0749 \\
+        % $\eval{\partial Z/\partial T}_\rho$ & 0.0852 & 0.0503 & \greenbox{0.1400} \\
+        % $h_\mathrm{outer}$ & 0.0134 & 0.0064 & 0.0132 \\
+        % $h_\mathrm{inner}$ & 0.0030 & 0.0013 & 0.0035 \\
+        % $c_v$ (gas) & 0.0676 & 0.0214 & \greenbox{0.1579} \\
+        % $\mu$ & 0.0724 & \yellowbox{0.1985} & 0.0087 \\
+        % $f$ & \greenbox{1.3207} & \greenbox{2.7952} & \yellowbox{0.1160} \\
         % relative temperature
-        $Z$ & 0.9007 & 2.0722 & 0.0289 \\
-        $\eval{\partial Z/\partial p}_T$ & 0.2179 & 0.0527 & 0.0084 \\
-        $\eval{\partial Z/\partial T}_p$ & 0.1859 & 0.0614 & 0.0157 \\
-        $\eval{\partial Z/\partial T}_\rho$ & 0.1021 & 0.0567 & 0.0454 \\
-        $h_\mathrm{outer}$ & 0.0171 & 0.0073 & 0.0061 \\
-        $h_\mathrm{inner}$ & 0.0033 & 0.0015 & 0.0015 \\
-        $c_v$ (gas) & 0.0881 & 0.0225 & 0.0321 \\
-        $\mu$ (gas) & 0.0782 & 0.2155 & 0.0027 \\
-        $f$ & 1.4316 & 3.0885 & 0.0306 \\
+        $Z$ & 0.8058 & 1.9431 & 0.0329 \\
+        $\eval{\partial Z/\partial p}_T$ & 0.1769 & 0.0483 & 0.0134 \\
+        $\eval{\partial Z/\partial T}_p$ & 0.1414 & 0.0562 & 0.0260 \\
+        $\eval{\partial Z/\partial T}_\rho$ & 0.0852 & 0.0503 & 0.0500 \\
+        $h_\mathrm{outer}$ & 0.0134 & 0.0064 & 0.0047 \\
+        $h_\mathrm{inner}$ & 0.0030 & 0.0013 & 0.0012 \\
+        $c_v$ (gas) & 0.0676 & 0.0214 & 0.0544 \\
+        $\mu$ (gas) & 0.0724 & 0.1985 & 0.0031 \\
+        $f$ & 1.3207 & 2.7952 & 0.0417 \\
         \bottomrule
     \end{tabular}
 \end{table}
