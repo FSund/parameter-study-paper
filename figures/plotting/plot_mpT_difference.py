@@ -149,16 +149,50 @@ if True:
             strings = ['a)', 'b)', 'c)']
             for ax, s in zip(axes, strings):
                 t = plt.text(
-                    0.5, 0.9, s, 
+                    0.1, 0.78, s, 
                     horizontalalignment='center', 
                     verticalalignment='top',
-                    bbox = dict(facecolor = [0.8]*3, edgecolor = 'none', boxstyle='round'),
+                    bbox = dict(facecolor = [0,0,0,0.3], edgecolor = 'none', boxstyle='round'),
                     transform = ax.transAxes,
                     fontsize = 11,
                     # fontweight = 1000 # no effect
                 )
 
             plt.savefig('difference_along_pipeline_shaded_abc.pdf')
+
+
+        if True:
+            ax = fig.add_subplot(111)
+            ax.set_position([0.62, 0.17, 0.25, 0.15])
+            idx = 2 # temperature
+
+            lines = []
+            yAverage = averageRelativeDiffAlong
+            yMax = relativeMaxDiffAlong
+            factor = 100
+
+            for i in range(len(yAverage[0][idx])):
+                l, = ax.plot(x/1000.0, yAverage[0][idx][i]*factor, lw = 1, label = dataSetLabels[i])
+                lines.append(l)
+
+            ax.grid(color = [0.8]*3)
+            ax.tick_params(axis = 'x', top = 'off', direction = 'out')
+            ax.tick_params(axis = 'y', right = 'off', direction = 'out')
+
+            ax.set_ylim([0, 0.15])
+            ax.set_xlim([610, 650])
+
+            mark_inset(axes[2], ax, loc1=1, loc2=3)
+
+            for tick in ax.xaxis.get_major_ticks():
+                tick.label.set_fontsize(8)
+            for tick in ax.yaxis.get_major_ticks():
+                tick.label.set_fontsize(8)
+
+            ax.yaxis.set_major_locator(MultipleLocator(0.05))
+            ax.xaxis.set_major_locator(MultipleLocator(10))
+
+            plt.savefig('difference_along_pipeline_shaded_abc_inset.pdf')
 
     if use_seaborn:
         mpl.rcParams['axes.prop_cycle'] = defaultColorCycle
