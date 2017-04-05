@@ -77,9 +77,10 @@ which is respectively 14.3 and 9.6 times higher than the next most important fac
 
 \begin{figure}[!p]%
     \centering%
-    \includegraphics{figures/difference_along_pipeline_shaded_abc.pdf}%
+    % \includegraphics{figures/difference_along_pipeline_shaded_abc.pdf}%
+    \includegraphics{figures/difference_along_pipeline_shaded_abc_inset.pdf}%
     \caption{%
-        Plots of the maximum (dashed lines) and time average (solid lines) difference between the base case and the cases with a parameter increased by \SI{20}{\percent}. The gray shaded areas illustrate the on-shore parts of the pipeline.
+        Plots of the maximum (dashed lines) and time average (solid lines) difference between the base case and the cases with a parameter increased by \SI{20}{\percent}, for each grid point used in the simulations. The gray shaded areas on the left and right side illustrate the on-shore parts of the pipeline.
         \label{fig:maxAndAverageForAll}%
     }%
 \end{figure}%
@@ -118,14 +119,24 @@ which is respectively 14.3 and 9.6 times higher than the next most important fac
 
 For the temperature the situation is less clear-cut. From \cref{tab:averageImpact} it is seen that the parameter which gives the highest average difference along the whole pipeline is the derivative of the compressibility factor $\eval{\partial Z/\partial T}_\rho$, with an average difference of \SI{0.045}{\percent}, 1.41~times the impact of the next parameter ($c_v$) and 1.48~times the impact of the third parameter ($f$). Compared to mass flow and pressure, where the two parameters with the highest impact give a difference of between 4 and 14 times the parameter with the third highest impact, the numbers for the temperature seem to \redtext{vary less}.
 
-From \cref{fig:maxAndAverageForAll} c) it can be seen that between \SI{125}{\kilo\meter} (\SI{100}{\kilo\meter} off-shore) and landfall at \SI{625}{\kilo\meter}, all parameters have much lower impact than closer to the start of the pipeline; no parameter have a higher maximum impact than \SI{0.15}{\percent} or an average impact of more than \SI{0.06}{\percent}. %
-This is because the sea has a fixed temperature, and acts as a thermal reservoir, so after a long off-shore section the gas comes to a thermal equilibrium with the ambient sea water, and the gas temperature is governed by the ambient temperature.
+Further, in \cref{fig:maxAndAverageForAll} c) peaks in the temperature responses of up to \SI{0.31}{\percent} are observed around \SI{20}{\kilo\meter} off-shore, before the impact of all parameters steadily decrease until they stabilize around \SIrange{100}{200}{\kilo\meter} off-shore. It can also be seen that between \SI{125}{\kilo\meter} (\SI{100}{\kilo\meter} off-shore) and landfall at \SI{625}{\kilo\meter}, all parameters have much lower impact than closer to the start of the pipeline; no parameter have a higher maximum impact than \SI{0.15}{\percent} or an average impact of more than \SI{0.06}{\percent}. %
+The stable behaviour in this area is caused by the fixed sea temperature, which acts as a thermal reservoir, so after a long off-shore section the gas comes to a thermal equilibrium with the sea water, and the gas temperature is governed by the ambient temperature.
 % This is because, after being transported offshore for some time, the gas comes to a thermal equilibrium with the ambient sea water. The sea has fixed temperature, and acts as a thermal reservoir, so after a long off-shore section the gas temperature will be governed by the ambient temperature, 
 % and will be independent of any parameters that affect the heat exchange rate between the gas and the ambient (\redtext{as long as the heat exchange rate is different from zero})\todo{what about things like Joule Thompson?, are there other effects??}.
 
-Further, a peak is observed around \SI{20}{\kilo\meter} off-shore in the temperature responses for most of the parameters, before the impact of all parameters steadily decrease until they stabilize around \SIrange{100}{200}{\kilo\meter} off-shore. 
-
 Finally, there is a steady increase in the impact on temperature between landfall and the outlet for most parameters. This is because at landfall the boundary conditions for the thermal exchange between the gas and the ambient changes (the pipeline goes from being exposed to sea water to buried under ground), and the thermal equilibrium between the gas and the ambient is disturbed. %Here the parameters that affect the heat exchange, like the inner and outer heat transfer coefficients, will again come into play
+%
+Some details on the temperature response near the outlet can be seen in the inset in \cref{fig:maxAndAverageForAll} d). It is clear that some of the parameters that have very little effect on the temperature while off-shore, like the heat capacity $c_v$ and the derivative of the compressibility factor $\eval{\partial Z/\partial T}_p$, have a much higher effect after going on-shore, and on the final outlet temperature. The impact of the derivative of the compressibility increases from \SI{0.0012}{\percent} at \SI{625}{\kilo\meter} to \SI{0.042}{\percent} at the outlet, a factor of 12.9, and the heat capacity $c_v$ increases from \SI{0.0018}{\percent} at \SI{625}{\kilo\meter} to \SI{0.069}{\percent} at the outlet, a factor of 13.8. The trend in the plot indicates that the impact would be even bigger with a longer on-shore section.
+
+% \begin{figure}[!ht]%
+%     \centering%
+%     \includegraphics{figures/outlet_temperature_detail.pdf}%
+%     \caption{%
+%         Details of the response in temperature to changes in the different parameters, close to the outlet. Plot of the average temperature difference at each grid point.
+%         % Plots of the maximum (dashed lines) and time average (solid lines) difference between the base case and the cases with a parameter increased by \SI{20}{\percent}. The gray shaded areas illustrate the on-shore parts of the pipeline.
+%         \label{fig:outletTemperatureDetail}%
+%     }%
+% \end{figure}%
 
 % \begin{figure}[!hb]%
 %     \centering%

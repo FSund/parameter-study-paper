@@ -149,10 +149,10 @@ if True:
             strings = ['a)', 'b)', 'c)']
             for ax, s in zip(axes, strings):
                 t = plt.text(
-                    0.1, 0.78, s, 
+                    0.1, 0.76, s, 
                     horizontalalignment='center', 
                     verticalalignment='top',
-                    bbox = dict(facecolor = [0,0,0,0.3], edgecolor = 'none', boxstyle='round'),
+                    bbox = dict(facecolor = [0,0,0,0.2], edgecolor = 'none', boxstyle='round'),
                     transform = ax.transAxes,
                     fontsize = 11,
                     # fontweight = 1000 # no effect
@@ -191,6 +191,17 @@ if True:
 
             ax.yaxis.set_major_locator(MultipleLocator(0.05))
             ax.xaxis.set_major_locator(MultipleLocator(10))
+
+            if show_abc:
+                t = plt.text(
+                    0.1, 0.9, "d)", 
+                    horizontalalignment='left', 
+                    verticalalignment='top',
+                    bbox = dict(facecolor = [0,0,0,0.2], edgecolor = 'none', boxstyle='round'),
+                    transform = ax.transAxes,
+                    fontsize = 11,
+                    # fontweight = 1000 # no effect
+                )
 
             plt.savefig('difference_along_pipeline_shaded_abc_inset.pdf')
 
