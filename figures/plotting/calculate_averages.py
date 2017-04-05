@@ -42,3 +42,11 @@ for idx, avg in enumerate(avgs):
     # avg[0] = avg[0]*100
     # avg[1] = avg[1]*100
     print('%s & %1.4f & %1.4f & %1.4f \\\\' %(labels[idx], avg[0]*100, avg[1]*100, avg[2]*100))
+
+print()
+for i in range(3):
+    a = np.sort(avgs[:,i])
+    den = a[-3]
+    print(a[-1]/den)
+    print(a[-2]/den)
+    print()
