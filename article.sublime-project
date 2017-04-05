@@ -1,0 +1,12 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"options": {
+		"root": "article.tex",
+		"pdf": "article.pdf"
+	}
+}

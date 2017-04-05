@@ -1,0 +1,19 @@
+\begin{table}[!hb]
+    \caption{
+        \redtext{caption}
+        % For mass flow and pressure the two highest numbers are highlighted in green, and the third-highest in yellow.
+        % \label{tab:averageImpact}
+    }
+    % \begin{tabular}{lc}
+    \centering
+    % \begin{tabular}{lS}
+    \begin{tabular}{lclcc}
+        \toprule
+        % Parameter & \parbox{4cm}{\centering Average relative impact on mass flow [\si{\percent}]} & \parbox{4cm}{\centering Average relative impact on pressure [\si{\percent}]} & \parbox{4cm}{\centering Average impact on temperature [\si{\celsius}]} \\
+        Parameter & \multicolumn{2}{c}{\parbox{4cm}{\centering Average relative impact on mass flow [\si{\percent}]}} & \parbox{4cm}{\centering Average relative impact on pressure [\si{\percent}]} & \parbox{4cm}{\centering Average impact on temperature [\si{\percent}]} \\
+        \midrule
+        $Z$ & 0.8058 & \colorbox{green}{\hspace{0.8058cm}} & 1.9431 & 0.0329 \\
+        $\eval{\partial Z/\partial p}_T$ & 0.1769 & \colorbox{green}{\hspace{0.1769cm}} & 0.0483 & 0.0134 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

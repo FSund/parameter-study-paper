@@ -1,0 +1,124 @@
+\subsection{Conservation laws}
+The governing equations for one-dimensional, non-isothermal, transient pipeline gas flow are: \\\\
+the \textbf{continuity equation}
+\begin{align}
+    \pdt{\rho} + \pdx{(\rho u)} = 0
+, \label{eq:contEq}
+\end{align}
+the \textbf{momentum equation} \cite{Daneshyar1976OneDimensional}
+\begin{align}
+    \rho\del{\pdt{u} + u \pdx{u}} + \pdx{p} = -\frac{f\rho \abs{u} u}{2D} - \rho g \sin \theta
+, \label{eq:momEq}
+\end{align}
+and the \textbf{energy equation} \cite{White2006Viscous}
+\begin{align}
+    \rho\del{\pdt{e} + u\pdx{e}} + p\pdx{u} = \frac{f\rho u^3}{2D} + \frac{\Omega}{A_h}
+, \label{eq:enEq}
+\end{align}
+%where $e$ is internal energy per unit mass, $\Omega$ is heat transfer through the pipe wall, and $A_h$ is the area through which the heat is transferred \cite{tt87, oc01, ac08}. 
+Using a real gas equation of state
+\begin{align}
+    \frac{p}{\rho} = ZRT
+\end{align}
+and introducing the mass flow rate $\dot m = \rho u A$, the governing equations are developed into partial differential equations for $p$, $\dot m$ and $T$
+{\allowdisplaybreaks % amsmath command to allow splitting of equations. Only works for align, not split environment. Use inside {} brackets to only allow for this one equation.
+\begin{align}
+    \pdt{p} ={}& 
+    \del{\frac{1}{p} - \frac{1}{Z} \eval{\dpd{Z}{p}}_T}^{-1}
+    \sbr{
+    \del{\frac{1}{T} + \frac{1}{Z}\eval{\dpd{Z}{T}}_p} \dpd{T}{t}
+    - \frac{ZRT}{pA}\dpd{\dot m}{x}
+    }
+\label{eq:continuityEquation}
+    \\
+    \begin{split}
+        \pdt{\dot m} ={}& \frac{\dot m ZRT}{pA} 
+        \sbr{
+            - 2\pdx{\dot m}
+            + \dot m \del{\frac{1}{p} - \frac{1}{Z} \eval{\dpd{Z}{p}}_T} \pdx{p}
+            - \dot m \del{\frac{1}{T} + \frac{1}{Z} \eval{\dpd{Z}{T}}_p} \pdx{T}
+        }
+        \\&
+        {}- A\pdx{p}
+        - \frac{fZRT \dot m \abs{\dot m}}{2DAp}
+        - \frac{pA}{ZRT}g\sin\theta
+    \end{split}
+\label{eq:momentumEquation}
+    \\
+    \begin{split}
+        \pdt{T} ={}&
+        - \frac{\dot m ZRT}{pA}\pdx{T}
+        - \frac{\dot m \del{ZRT}^2}{pAc_v}T \del{\frac{1}{T} + \frac{1}{Z}\eval{\dpd{Z}{T}}_\rho} \\
+        &{}\times 
+        \sbr{
+            \frac{1}{\dot m}\dpd{\dot m}{x} 
+            + \del{\frac{1}{T} + \frac{1}{Z}\eval{\dpd{Z}{T}}_p}\pdx{T}
+            - \del{\frac{1}{p} - \frac{1}{Z}\eval{\dpd{Z}{p}}_T}\pdx{p}
+        } \\
+        &{}+ \frac{f}{2c_vD}\del{\frac{ZRT|\dot m|}{pA}}^3 
+        + \frac{ZRT}{p c_v} \frac{\Omega}{A_h}
+        .
+    \end{split}
+\label{eq:energyEquation}
+\end{align}
+}
+
+The resulting non-linear partial differential equations are discretized using the backward-time central space (BTCS) implicit finite difference method, and solved using matrix inversion and the Jacobi iterative method \cite{Ferziger2002Computational}.
+
+\subsection{Closure relations}
+\subsubsection{Heat transfer}
+To calculate the heat transfer $\Omega$ between the gas and the surroundings a transient one-dimensional radial model \cite{Chaczykowski2010Transient} is used. This model includes heat storage in the pipeline wall and surrounding medium, and has been shown to give accurate results for the temperature development in long offshore pipelines \cite{Helgaker2014Validation,Oosterkamp2015Modelling,Oosterkamp2016Heat}, given accurate ambient temperatures \cite{Sund2015Pipeline}.
+
+When calculating the heat transfer $\Omega$, the inner and outer heat transfer coefficients are used to calculate respectively the heat transfer between the gas and the pipeline wall, and the heat transfer between the pipeline wall and the ambient. 
+
+The \emph{inner} film heat transfer coefficient can be determined from the Dittus-Boelter relation \cite{Winterton1998Where,Dittus1985Heat}, which is valid for forced convection in turbulent pipe flow with Reynolds numbers~$\geq$~10000 \cite{Bergman2011Fundamentals}
+% \begin{align}
+%     &\Nuss = \frac{h_\mathrm{inner}D}{k} = 0.023\times\Reyn^{0.8}\Pran^{0.4}
+% , \label{eq:dittusBoelter}
+% \\
+%     &\Pran = \frac{c_p\nu}{k}
+% \end{align}
+% \begin{align}
+%     \Nuss = \frac{h_\mathrm{inner}D}{k} = 0.023\times\Reyn^{0.8}\Pran^{0.4}
+% , \label{eq:dittusBoelter}
+% \end{align}
+\begin{align}
+    &\Nuss = \frac{hD}{k} = 0.023\times\Reyn^{0.8}\Pran^{0.4},
+    \\
+    &\mathrm{where~} \Pran = \frac{c_p\nu}{k} \mathrm{~and~} \Reyn = \frac{\rho u D}{\nu},
+\end{align}
+$\Nuss$ is the Nusselt number, $h$ is the film heat transfer coefficient, $D$ is the inner diameter of the pipe, $k$ is the thermal conductivity of the gas, $\Reyn$ is the Reynolds number, and $\Pran$ is the Prandtl number. 
+
+The outer film heat transfer coefficient can be determined from a similar equation, valid for circular cylinder in cross flow with Reynolds numbers between $10^3$ and $2\times 10^5$ \cite{Bergman2011Fundamentals}\todo{consider changing to eq. 7.52 in Incropera}
+\begin{align}
+    \Nuss = \frac{hD}{k} = 0.26\times\Reyn^{0.6}\Pran^{0.3}
+,
+\end{align}
+where $D$ is the outer diameter of the pipe and $k$ is the thermal conductivity of the ambient medium.
+\todo{Consider re-running simulations, since h\_outer calculation has changed -- used constant before.}
+
+\subsubsection{Equation of state}
+The BWRS equation of state \cite{Starling1973Fluid} is used to determine the gas density, the compressibility factor $Z$ and its derivatives, and is also used to calculate properties like the heat capacity $c_v$. The BWRS equation is the following function of molar density $\rho_m$ and temperature
+\begin{align}
+\begin{split}
+    P ={} &\rho_m RT 
+    + \del{B_0 RT - A_0 - \frac{C_0}{T^2} + \frac{D_0}{T^3} - \frac{E_0}{T^4}}\rho_m^2 
+    + \del{bRT - a - \frac{d}{T}}\rho_m^3 
+    \\&
+    + \alpha \del{a + \frac{d}{T}}\rho_m^6 
+    + \frac{c\rho_m^3}{T^2}\del{1 + \gamma \rho_m^2} \exp\del{-\gamma \rho_m^2}
+.
+\end{split}
+\end{align}
+The parameters $A_0, B_0$, etc. are 11 mixture parameters specific to BWRS, and are calculated using mixing rules from pure component parameters given in \cite{Starling1973Fluid}\todo{we use Gassco tuned parameters...} .
+% \dots, D_0$, $a, \dots, d$, $\alpha$ and $\gamma$ are .
+For high pressures, such as in the Norwegian export network, the selection of equation of state can have a significant impact on the simulation results \cite{Helgaker2014Transient,Chaczykowski2009Sensitivity}.
+
+\subsubsection{Other}
+The Colebrook-White equation \cite{Colebrook1939Turbulent} is used to calculate the friction factor $f$
+\begin{align}
+    \frac{1}{\sqrt{f}} = -2\log \del{\frac{\epsilon}{3.7 D} + \frac{2.51}{\Reyn \sqrt{f}}}
+    \label{eq:colebrookWhite}
+,
+\end{align}
+where $\epsilon$ is the sand grain equivalent roughness of the inner pipeline wall. Here a value of \SI{3}{\micro\meter} was used.

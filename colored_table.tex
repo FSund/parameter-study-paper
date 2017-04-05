@@ -1,0 +1,42 @@
+% \begin{table}[ht]
+%     \begin{center}
+%         \begin{tabular}{RRRRRRRRRR}
+%           1.00 & 1.00 & 1.00 & 1.00 & 0.99 & 0.98 & 0.96 & 0.90 & 0.82 & 0.37 \\
+%           1.00 & 1.00 & 0.99 & 0.98 & 0.95 & 0.90 & 0.82 & 0.61 & 0.37 & 0.01 \\
+%           1.00 & 0.99 & 0.98 & 0.96 & 0.90 & 0.82 & 0.67 & 0.37 & 0.14 & 0.00 \\
+%           1.00 & 0.98 & 0.95 & 0.90 & 0.78 & 0.61 & 0.37 & 0.08 & 0.01 & 0.00 \\
+%           0.99 & 0.95 & 0.90 & 0.82 & 0.61 & 0.37 & 0.14 & 0.01 & 0.00 & 0.00 \\
+%           0.98 & 0.90 & 0.82 & 0.67 & 0.37 & 0.14 & 0.02 & 0.00 & 0.00 & 0.00 \\
+%           0.95 & 0.78 & 0.61 & 0.37 & 0.08 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00 \\
+%           0.90 & 0.61 & 0.37 & 0.14 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+%           0.82 & 0.37 & 0.14 & 0.02 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+%           0.37 & 0.01 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+%         \end{tabular}
+%     \end{center}
+% \end{table}
+
+\begin{table}[!hb]
+    \caption{
+        \redtext{caption}
+        \label{tab:}
+    }
+    \centering
+    \begin{tabular}{lRRT}
+        \toprule
+         % & \multicolumn{3}{c}{Item} \\
+        & \multicolumn{1}{c}{Chemical Component} \\% & \parbox{4cm}{\centering Average relative impact on pressure} & \parbox{4cm}{\centering Average impact on temperature} \\
+        % Parameter & [\si{\percent}] & [\si{\percent}] & [\si{\celsius}] \\
+        \midrule
+        % output from Python script goes here
+        $Z$ & 0.8058 & 1.9431 & 0.0925 \\
+        $\eval{\partial Z/\partial p}_T$ & 0.1769 & 0.0483 & 0.0371 \\
+        $\eval{\partial Z/\partial T}_p$ & 0.1414 & 0.0562 & 0.0749 \\
+        $\eval{\partial Z/\partial T}_\rho$ & 0.0852 & 0.0503 & 0.1400 \\
+        $h_\mathrm{seawater}$ & 0.0134 & 0.0064 & 0.0132 \\
+        $h_\mathrm{inner}$ & 0.0030 & 0.0013 & 0.0035 \\
+        $c_v$ (gas) & 0.0676 & 0.0214 & 0.1579 \\
+        Viscosity & 0.0724 & 0.1985 & 0.0087 \\
+        Friction & 1.3207 & 2.7952 & 0.1160 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

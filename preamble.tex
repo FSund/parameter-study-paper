@@ -1,0 +1,40 @@
+% \usepackage[parfill]{parskip}
+\usepackage[euler]{textgreek} % option "euler" uses Euler fonts as a companion for all fonts except Helvetica -- this is the default LaTeX-font for greek symbols as far as I can see
+
+% biber/biblatex  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+\usepackage{csquotes} % required by {babel} (or biblatex?)
+\usepackage[%
+    backend=biber,  % biblatex is the package, biber is the (default). The alternative is backend=bibtex, but biber should be better.
+    sorting=nyt,    %
+%    style=numeric,  %
+    style=numeric-comp,
+    %firstinits=true % render all first and middle names as initials
+    giveninits=true
+]{biblatex} % Note that "sorting=none" is NOT the same as leaving the field blank, "sorting=none" means "sorting=citeorder".
+% About DATES:
+% The date fields date, origdate, eventdate, and urldate require a date specification in yyyy-mm-dd format. Date ranges are given as yyyy-mm-dd/yyyy-mm-dd. Partial dates are valid provided that date components are omitted at the end only. You may specify an open ended date range by giving the range separator and omitting the end date (e. g., yyyy/).
+
+% Example from here: http://codydunne.blogspot.no/2012/01/suppressing-bibtex-fields-for-specific.html
+\AtEveryBibitem{% Clean up the bibtex rather than editing it
+    \clearlist{address}
+%  \clearfield{date}
+%     \ifentrytype{www}{}{ % url is alias for ``online''
+%         \clearfield{url}
+%     }
+    \ifentrytype{online}{}{
+        \clearfield{url}
+    }
+    \clearfield{doi}
+    \clearfield{eprint}
+    \clearfield{isbn}
+    \clearfield{issn}
+    \clearlist{location}
+    \clearfield{month}
+    \clearfield{series}
+    
+    \ifentrytype{book}{}{% Remove publisher and editor except for books
+        % \clearlist{publisher}
+        % \clearname{editor}
+        \clearfield{pages}
+    }
+}

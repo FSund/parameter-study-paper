@@ -1,0 +1,61 @@
+% http://tex.stackexchange.com/a/175105/31078
+
+% colored tables
+\usepackage{tikz}
+\usepackage{collcell}
+
+% the min, mid and max values
+\newcommand*{\MinNumberA}{0.0030}%
+\newcommand*{\MaxNumberA}{1.3207 }%
+% \newcommand*{\MinNumberB}{0.0}%
+% \newcommand*{\MaxNumberB}{2.7952}%
+\newcommand*{\MinNumberC}{0.0}%
+\newcommand*{\MaxNumberC}{0.1579}%
+
+% apply the gradient macro
+\newcommand{\ApplyGradientA}[1]{%
+    \pgfmathsetmacro{\PercentColor}{%
+        max(%
+            min(%
+                100.0*(\MaxNumber - #1)/(\MaxNumberA - \MinNumberA),%
+                100.0%
+            ),%
+            0.00%
+        )%
+    } %
+    \hspace{-0.33em}\colorbox{white!\PercentColor!green}{#1}
+}
+
+% \newcommand{\ApplyGradientB}[1]{%
+%     \pgfmathsetmacro{\PercentColor}{%
+%         max(%
+%             min(%
+%                 100.0*(\MaxNumber - #1)/(\MaxNumberB - \MinNumberB),%
+%                 100.0%
+%             ),%
+%             0.00%
+%         )%
+%     } %
+%     \hspace{-0.33em}\colorbox{white!\PercentColor!green}{#1}
+% }
+
+\newcommand{\ApplyGradientC}[1]{%
+    \pgfmathsetmacro{\PercentColor}{%
+        max(%
+            min(%
+                100.0*(\MaxNumber - #1)/(\MaxNumberC - \MinNumberC),%
+                100.0%
+            ),%
+            0.00%
+        )%
+    } %
+    \hspace{-0.33em}\colorbox{white!\PercentColor!green}{#1}
+}
+
+\newcolumntype{R}{>{\collectcell\ApplyGradientA}c<{\endcollectcell}}
+% \newcolumntype{R2}{>{\collectcell\ApplyGradientB}c<{\endcollectcell}}
+\newcolumntype{T}{>{\collectcell\ApplyGradientC}c<{\endcollectcell}}
+
+% \renewcommand{\arraystretch}{0}
+% \setlength{\fboxsep}{3mm} % box size
+% \setlength{\tabcolsep}{0pt}
