@@ -50,9 +50,9 @@ This was calculated for each parameter in the sensitivity study, at every grid p
 %
 % A plot of the maximum and average differences for the compressibility factor $Z$ can be seen in \cref{fig:maxAndAverageDiffForZ}, where the maximum and average mass flow, pressure, and temperature difference is shown for the whole pipeline. 
 %
-A plot of the maximum and average relative differences as function of position, for all parameters in the study, are shown in \cref{fig:maxAndAverageForAll}. 
+A plot of the maximum and average differences as function of position, for all parameters in the study, are shown in \cref{fig:maxAndAverageForAll}, and a list of the average impact on the whole pipeline is given in \cref{tab:averageImpact}. %
 
-From \cref{fig:temperatureBarChart} a) and b) it can be seen that the parameters with the highest impact on both mass flow and pressure are the friction factor $f$ and the compressibility factor $Z$. For the mass flow the greatest impact is at the outlet, with a gradual decrease from the inlet to the outlet. For the pressure the greatest impact is at the inlet, with a gradual decrease from the inlet to the outlet. 
+From \cref{fig:maxAndAverageForAll} a) and b) it can be seen that the parameters with the highest impact on both mass flow and pressure are the friction factor $f$ and the compressibility factor $Z$. For the mass flow the greatest impact is at the outlet, with a gradual decrease from the inlet to the outlet. For the pressure the greatest impact is at the inlet, with a gradual decrease from the inlet to the outlet. 
 % All other parameters have %
 % less than \SI{1.3}{\percent} maximum %
 % %(\redtext{1.23 for dZdT|p}) %
@@ -65,7 +65,7 @@ From \cref{fig:temperatureBarChart} a) and b) it can be seen that the parameters
 % % (\redtext{0.337 for viscosity}) %
 % impact on the pressure. %
 
-A list of the average impact of all parameters is listed in \cref{tab:averageImpact}. %
+% A list of the average impact of all parameters is listed in \cref{tab:averageImpact}. %
 %
 The average impact on mass flow is found to be \SI{1.43}{\percent} for the friction factor and \SI{0.90}{\percent} for the compressibility factor, % 6.5703443811 4.133998237
 which is respectively 6.6 and 4.1 times higher than the third most important factor, $\eval{\partial Z/\partial p}_T$, which has an average impact of \SI{0.22}{\percent}. %
@@ -86,16 +86,18 @@ which is respectively 14.3 and 9.6 times higher than the next most important fac
 
 \begin{table}[!hb]
     \caption{
-        \redtext{caption}
+        Table of the average relative difference in mass flow, pressure and temperature, for all parameters in the sensitivity study. \redtext{weighted average using non-uniform grid spacing} %
         % For mass flow and pressure the two highest numbers are highlighted in green, and the third-highest in yellow.
-        \label{tab:averageImpact}
-    }
+        \label{tab:averageImpact} %
+    } %
     % \begin{tabular}{lc}
-    \centering
+    \centering %
     % \begin{tabular}{lS}
-    \begin{tabular}{cccc}
+    \begin{tabular}{cccc} %
         \toprule
-        Parameter & \parbox{3.3cm}{\centering Average relative impact on \\ mass flow [\si{\percent}]} & \parbox{3.3cm}{\centering Average relative impact on \\ pressure [\si{\percent}]} & \parbox{3.3cm}{\centering Average impact on temperature [\si{\percent}]} \\
+        % Parameter & \parbox{3.3cm}{\centering Average \\ difference in \\ mass flow [\si{\percent}]} & \parbox{3.3cm}{\centering Average \\ difference in \\ pressure [\si{\percent}]} & \parbox{3.3cm}{\centering Average \\ difference in temperature [\si{\percent}]} \\
+        & \multicolumn{3}{c}{Average relative difference} \\ \cmidrule(r){2-4}
+        \parbox{2.5cm}{\centering Parameter} & Mass flow [\si{\percent}] & Pressure [\si{\percent}] & Temperature [\si{\percent}] \\
         \midrule
         % output from Python script goes here
         % relative temperature
@@ -114,10 +116,14 @@ which is respectively 14.3 and 9.6 times higher than the next most important fac
 
 % \input{colored_table.tex}
 
-For the temperature the situation is a bit more complicated. From \cref{fig:maxAndAverageForAll} c) it can be seen that between \SI{125}{\kilo\meter} (\SI{100}{\kilo\meter} off-shore) and landfall at \SI{625}{\kilo\meter}, all parameters have very little impact (compared closer to the start of the pipeline), and no parameter have a higher maximum impact than \SI{0.15}{\percent} or an average impact of more than \SI{0.06}{\percent}. %
-This is because the gas comes to a thermal equilibrium with the ambient sea water after being transported offshore for some time. The sea has fixed temperature, and acts as a thermal reservoir, so after a long off-shore section the gas temperature will be governed by the ambient temperature, and will be independent of any parameters that affect the heat exchange rate between the gas and the ambient (\redtext{as long as the heat exchange rate is different from zero})\todo{what about things like Joule Thompson?, are there other effects??}.
+For the temperature the situation is less clear-cut. From \cref{tab:averageImpact} it is seen that the parameter with the highest overall impact is the derivative of the compressibility factor $\eval{\partial Z/\partial T}_\rho$, with an average difference of \SI{0.0454}{\percent}, 1.41~times the impact of the next parameter ($c_v$) and 1.48~times the impact of the third parameter ($f$). Compared to mass flow and pressure, where the two parameters with the highest impact gave a difference of between 4 and 14 times the parameter with the third highest impact, the numbers for the temperature seem to be more even.\todo{have a look at this paragraph..}
 
-Further, a peak is observed around \SI{20}{\kilo\meter} off-shore in the temperature responses for most of the parameters, before the impact of all parameters steadily decrease until they stabilize around \SIrange{100}{200}{\kilo\meter} off-shore. Finally, there is a steady increase in the impact on temperature between landfall and the outlet for most parameters. This is because at landfall the boundary conditions for the thermal exchange between the gas and the ambient changes (the pipeline goes from being exposed to sea water to buried under ground), and the thermal equilibrium between the gas and the ambient is disturbed. %Here the parameters that affect the heat exchange, like the inner and outer heat transfer coefficients, will again come into play
+From \cref{fig:maxAndAverageForAll} c) it can be seen that between \SI{125}{\kilo\meter} (\SI{100}{\kilo\meter} off-shore) and landfall at \SI{625}{\kilo\meter}, all parameters have very little impact (compared closer to the start of the pipeline), and no parameter have a higher maximum impact than \SI{0.15}{\percent} or an average impact of more than \SI{0.06}{\percent}. %
+This is because, after being transported offshore for some time, the gas comes to a thermal equilibrium with the ambient sea water. The sea has fixed temperature, and acts as a thermal reservoir, so after a long off-shore section the gas temperature will be governed by the ambient temperature, and will be independent of any parameters that affect the heat exchange rate between the gas and the ambient (\redtext{as long as the heat exchange rate is different from zero})\todo{what about things like Joule Thompson?, are there other effects??}.
+
+Further, a peak is observed around \SI{20}{\kilo\meter} off-shore in the temperature responses for most of the parameters, before the impact of all parameters steadily decrease until they stabilize around \SIrange{100}{200}{\kilo\meter} off-shore. 
+
+Finally, there is a steady increase in the impact on temperature between landfall and the outlet for most parameters. This is because at landfall the boundary conditions for the thermal exchange between the gas and the ambient changes (the pipeline goes from being exposed to sea water to buried under ground), and the thermal equilibrium between the gas and the ambient is disturbed. %Here the parameters that affect the heat exchange, like the inner and outer heat transfer coefficients, will again come into play
 
 % \begin{figure}[!hb]%
 %     \centering%
@@ -131,8 +137,8 @@ Further, a peak is observed around \SI{20}{\kilo\meter} off-shore in the tempera
 % In \cref{fig:massFlowBarChart,fig:pressureBarChart,fig:temperatureBarChart} the maximum and average differences between the base case and each case with modified parameters, at certain points of interest along the pipeline, are shown in bar charts. For the mass flow and pressure the observations from before are confirmed: the most important parameters are the friction factor $f$ and the compressibility factor $Z$, at the start of the pipeline for the pressure, and at the end of the pipeline for the mass flow.
 %, like the inlet, the end of the on-shore section etc
 
-To further analyze the temperature responses, the maximum and average relative temperature differences at certain points of interest along the pipeline, are shown in a bar chart in \cref{fig:temperatureBarChart}. %
-It is seen that the heat capacity $c_v$ is the parameter with the highest impact between all the selected points on the pipeline, with the two highest average temperature differences (respectively at \SI{20}{\kilo\meter} off-shore, and at the end of the on-shore section), and the highest and third highest maximum differences (respectively at \SI{20}{\kilo\meter} off-shore and at the end of the on-shore section). 
+To further analyze the temperature responses, the maximum and average temperature differences at certain points of interest along the pipeline are shown in a bar chart in \cref{fig:temperatureBarChart}. %
+It is seen that the heat capacity $c_v$ is the parameter with the highest impact between all the selected points on the pipeline, with the two highest average temperature differences (respectively at \SI{20}{\kilo\meter} off-shore, and at the end of the on-shore section), and the highest and third highest maximum differences (respectively at \SI{20}{\kilo\meter} off-shore and at the end of the on-shore section). The parameter with the highest \st{average and maximum} impact at \SI{300}{\kilo\meter} offshore is the derivative of the compressibility factor $\partial Z/\partial T\/|_\rho$, while at the end of the off-shore section and at the outlet it is the friction factor $f$.
 
 % It can be seen that for the first 45 kilometers of the pipeline, the most important
 % parameter is the heat capacity $c_v$, giving an average temperature difference of up to \SI{0.87}{\celsius} (maximum difference of \SI{1.14}{\celsius}). Following this, in descending order of importance are the derivatives of the compressibility %
