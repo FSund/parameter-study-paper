@@ -30,8 +30,8 @@
   \begin{flushright}
    \scriptsize
 \vspace{-50pt}
-   9. National Conference on Computational Mechanics\\
-    MekIT'15\\
+   9th National Conference on Computational Mechanics\\
+    MekIT'17\\
 B. Skallerud and H I Andersson (Eds)\\
  %  \copyright  ~CIMNE, Barcelona, 2011
   \end{flushright}
