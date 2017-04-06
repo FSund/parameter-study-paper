@@ -1,5 +1,5 @@
 \subsection{Conservation laws}
-The governing equations for one-dimensional, non-isothermal, transient pipeline gas flow are: \\\\
+The governing equations for compressible one-dimensional, non-isothermal, transient pipeline gas flow are: \\\\
 the \textbf{continuity equation}
 \begin{align}
     \pdt{\rho} + \pdx{(\rho u)} = 0
@@ -67,11 +67,11 @@ The resulting non-linear partial differential equations are discretized using th
 
 \subsection{Closure relations}
 \subsubsection{Heat transfer}
-To calculate the heat transfer $\Omega$ between the gas and the surroundings a transient one-dimensional radial model \cite{Chaczykowski2010Transient} is used. This model includes heat storage in the pipeline wall and surrounding medium, and has been shown to give accurate results for the temperature development in long offshore pipelines \cite{Helgaker2014Validation,Oosterkamp2015Modelling,Oosterkamp2016Heat}, given accurate ambient temperatures \cite{Sund2015Pipeline}.
+To calculate the heat transfer $\Omega$ between the gas and the surroundings, a transient one-dimensional radial model \cite{Chaczykowski2010Transient} is used. This model includes heat storage in the pipeline wall and surrounding medium, and has been shown to give accurate results for the temperature development in long offshore pipelines \cite{Helgaker2014Validation,Oosterkamp2015Modelling,Oosterkamp2016Heat}, given accurate ambient temperatures \cite{Sund2015Pipeline}.
 
 When calculating the heat transfer $\Omega$, the inner and outer heat transfer coefficients are used to calculate respectively the heat transfer between the gas and the pipeline wall, and the heat transfer between the pipeline wall and the ambient. 
 
-The \emph{inner} film heat transfer coefficient can be determined from the Dittus-Boelter relation \cite{Winterton1998Where,Dittus1985Heat}, which is valid for forced convection in turbulent pipe flow with Reynolds numbers~$\geq$~10000 \cite{Bergman2011Fundamentals}
+The \emph{inner} film heat transfer coefficient can be determined from the Dittus-Boelter relation \cite{Winterton1998Where,Dittus1985Heat}, which is valid for forced convection in turbulent pipe flow with Reynolds numbers larger than $10^4$ \cite{Bergman2011Fundamentals}. The Dittus-Boelter relation is
 % \begin{align}
 %     &\Nuss = \frac{h_\mathrm{inner}D}{k} = 0.023\times\Reyn^{0.8}\Pran^{0.4}
 % , \label{eq:dittusBoelter}
@@ -89,16 +89,17 @@ The \emph{inner} film heat transfer coefficient can be determined from the Dittu
 \end{align}
 $\Nuss$ is the Nusselt number, $h$ is the film heat transfer coefficient, $D$ is the inner diameter of the pipe, $k$ is the thermal conductivity of the gas, $\Reyn$ is the Reynolds number, and $\Pran$ is the Prandtl number. 
 
-The outer film heat transfer coefficient can be determined from a similar equation, valid for circular cylinder in cross flow with Reynolds numbers between $10^3$ and $2\times 10^5$ \cite{Bergman2011Fundamentals}\todo{consider changing to eq. 7.52 in Incropera}
+The outer film heat transfer coefficient can be determined from a similar equation, valid for circular cylinders in cross flow with Reynolds numbers between $10^3$ and $2\times 10^5$ %
+%\cite{Bergman2011Fundamentals}\todo{consider changing to eq. 7.52 in Incropera}
 \begin{align}
     \Nuss = \frac{hD}{k} = 0.26\times\Reyn^{0.6}\Pran^{0.3}
 ,
 \end{align}
 where $D$ is the outer diameter of the pipe and $k$ is the thermal conductivity of the ambient medium.
-\todo{Consider re-running simulations, since h\_outer calculation has changed -- used constant before.}
+% \todo{Consider re-running simulations, since h\_outer calculation has changed -- used constant before.}
 
 \subsubsection{Equation of state}
-The BWRS equation of state \cite{Starling1973Fluid} is used to determine the gas density, the compressibility factor $Z$ and its derivatives, and is also used to calculate properties like the heat capacity $c_v$. The BWRS equation is the following function of molar density $\rho_m$ and temperature
+The BWRS (Benedict–Webb–Rubin-Starling) equation of state \cite{Starling1973Fluid} is used to determine the gas density, the compressibility factor $Z$ and its derivatives, and is also used to calculate properties like the heat capacity of the gas $c_v$. The BWRS equation is the following function of molar density $\rho_m$ and temperature
 \begin{align}
 \begin{split}
     P ={} &\rho_m RT 
@@ -110,9 +111,12 @@ The BWRS equation of state \cite{Starling1973Fluid} is used to determine the gas
 .
 \end{split}
 \end{align}
-The parameters $A_0, B_0$, etc. are 11 mixture parameters specific to BWRS, and are calculated using mixing rules from pure component parameters given in \cite{Starling1973Fluid}\todo{we use Gassco tuned parameters...} .
+The parameters $A_0, B_0$, etc. are 11 mixture parameters specific to BWRS, and are calculated using mixing rules and pure component properties given in \cite{Starling1973Fluid}, and a set of parameters $A_i$ and $B_i$.%
+%\todo{we use Gassco tuned parameters...} .
 % \dots, D_0$, $a, \dots, d$, $\alpha$ and $\gamma$ are .
-For high pressures, such as in the Norwegian export network, the selection of equation of state can have a significant impact on the simulation results \cite{Helgaker2014Transient,Chaczykowski2009Sensitivity}.
+The set of parameters $A_i$ and $B_i$ used in this study has been especially tuned for the Norwegian gas transport network%
+\todo{cite Calsep report?}%
+. For high pressures, such as in the Norwegian export network, the selection of equation of state can have a significant impact on the simulation results \cite{Helgaker2014Transient,Chaczykowski2009Sensitivity}.
 
 \subsubsection{Other}
 The Colebrook-White equation \cite{Colebrook1939Turbulent} is used to calculate the friction factor $f$
@@ -121,4 +125,4 @@ The Colebrook-White equation \cite{Colebrook1939Turbulent} is used to calculate 
     \label{eq:colebrookWhite}
 ,
 \end{align}
-where $\epsilon$ is the sand grain equivalent roughness of the inner pipeline wall. Here a value of \SI{3}{\micro\meter} was used.
+where $\epsilon$ is the sand grain equivalent roughness of the inner pipeline wall. Here a value of 3~micrometer was used.

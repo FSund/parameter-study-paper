@@ -1,27 +1,27 @@
-\begin{table}[!hb]
-    \caption{
-        \redtext{caption}
-        % For mass flow and pressure the two highest numbers are highlighted in green, and the third-highest in yellow.
-        % \label{tab:averageImpact}
-    }
-    % \begin{tabular}{lc}
-    \centering
-    % \begin{tabular}{lS}
-    \begin{tabular}{lclcc}
-        \toprule
-        % Parameter & \parbox{4cm}{\centering Average relative impact on mass flow [\si{\percent}]} & \parbox{4cm}{\centering Average relative impact on pressure [\si{\percent}]} & \parbox{4cm}{\centering Average impact on temperature [\si{\celsius}]} \\
-        Parameter & \multicolumn{2}{c}{\parbox{4cm}{\centering Average relative impact on mass flow [\si{\percent}]}} & \parbox{4cm}{\centering Average relative impact on pressure [\si{\percent}]} & \parbox{4cm}{\centering Average impact on temperature [\si{\percent}]} \\
-        \midrule
-        $Z$ & 0.8058 & \colorbox{green}{\hspace{0.8058cm}} & 1.9431 & 0.0329 \\
-        $\eval{\partial Z/\partial p}_T$ & 0.1769 & \colorbox{green}{\hspace{0.1769cm}} & 0.0483 & 0.0134 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+% \begin{table}[!hb]
+%     \caption{
+%         \redtext{caption}
+%         % For mass flow and pressure the two highest numbers are highlighted in green, and the third-highest in yellow.
+%         % \label{tab:averageImpact}
+%     }
+%     % \begin{tabular}{lc}
+%     \centering
+%     % \begin{tabular}{lS}
+%     \begin{tabular}{lclcc}
+%         \toprule
+%         % Parameter & \parbox{4cm}{\centering Average relative impact on mass flow [\si{\percent}]} & \parbox{4cm}{\centering Average relative impact on pressure [\si{\percent}]} & \parbox{4cm}{\centering Average impact on temperature [\si{\celsius}]} \\
+%         Parameter & \multicolumn{2}{c}{\parbox{4cm}{\centering Average relative impact on mass flow [\si{\percent}]}} & \parbox{4cm}{\centering Average relative impact on pressure [\si{\percent}]} & \parbox{4cm}{\centering Average impact on temperature [\si{\percent}]} \\
+%         \midrule
+%         $Z$ & 0.8058 & \colorbox{green}{\hspace{0.8058cm}} & 1.9431 & 0.0329 \\
+%         $\eval{\partial Z/\partial p}_T$ & 0.1769 & \colorbox{green}{\hspace{0.1769cm}} & 0.0483 & 0.0134 \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
 
-The relative importance of a selection of model parameters for modelling long offshore compressible gas pipelines were determined, by modifying nine different model parameters by \SI{20}{\percent} and investigating the response in mass flow, pressure and temperature.
+To determine where to apply effort when trying to improve compressible gas flow models for long offshore pipelines, the relative importance of a selection of model parameters were determined, by modifying nine different model parameters by \SI{20}{\percent}, and investigating the response in mass flow, pressure and temperature.
 
-It was found that, for the mass flow and pressure, the most important parameters by a factor of between 4 and 14 are the friction factor $f$ and the compressibility factor $Z$, giving an average difference in mass flow of respectively \SI{1.43}{\percent} for the friction factor and \SI{0.90}{\percent} for the compressibility factor, and an average difference in pressure of \SI{3.09}{\percent} for the friction factor and \SI{2.07}{\percent} for the compressibility factor.
+It was found that, for the mass flow and pressure, the most important parameters by a factor of between 4 and 14 are the friction factor $f$ and the compressibility factor $Z$, with an average impact on the modelled mass flow of respectively \SI{1.43}{\percent} for the friction factor and \SI{0.90}{\percent} for the compressibility factor, and an average impact on the modelled pressure of \SI{3.09}{\percent} for the friction factor and \SI{2.07}{\percent} for the compressibility factor.
 
-For the temperature none of the parameters stood out like they did for the mass flow and pressure, but it was nevertheless found that the parameter with the highest average impact was the derivative of the compressibility factor with respect to temperature, at constant density, $\eval{\partial Z/\partial T}_\rho$, with an average difference of \SI{0.045}{\percent}, 1.41~times the impact of the next parameter ($c_v$) and 1.48~times the impact of the third parameter ($f$). It was further found that there was a peak in the temperature response for most of the parameters around \SI{20}{\kilo\meter} after going off-shore, but that the 
-after a long offshore section, none of the parameters had a 
+For the temperature none of the parameters stood out like they did for mass flow and pressure, but it was found that the parameter with the highest average impact on the modelled temperature is the derivative of the compressibility factor with respect to temperature (at constant density) $\eval{\partial Z/\partial T}_\rho$, with an average difference of \SI{0.045}{\percent}, 1.41~times the impact of the next parameter (the gas heat capacity $c_v$) and 1.48~times the impact of the third parameter (the friction factor $f$). Further, a peak in the temperature response for most of the parameters was observed around \SI{20}{\kilo\meter} after going off-shore, with the highest peak attributed to the gas heat capacity $c_v$. %
+The response of all parameters are greatly diminished after a long offshore section, and the highest impact at \SI{300}{\kilo\meter} off-shore is attributed to $\eval{\partial Z/\partial T}_\rho$. Finally, at the end of the off-shore section, and at the outlet, the most important parameter is the friction factor $f$.
 
