@@ -95,7 +95,8 @@ which is respectively 14.3 and 9.6 times higher than the third most important fa
 
 \begin{table}[!hb]
     \caption{
-        Table of the average relative difference in mass flow, pressure and temperature, for all parameters in the sensitivity study. \redtext{weighted average using non-uniform grid spacing} %
+        Table of the average relative difference in mass flow, pressure and temperature, for all parameters in the sensitivity study. 
+        % \redtext{weighted average using non-uniform grid spacing} %
         % For mass flow and pressure the two highest numbers are highlighted in green, and the third-highest in yellow.
         \label{tab:averageImpact} %
     } %
@@ -196,8 +197,9 @@ It is seen that the heat capacity $c_v$ is the parameter with the highest impact
     \centering%
     \includegraphics{figures/barchart_all_temperature_absolute.pdf}%
     \caption{%
-        Chart of the average and maximum relative difference in temperature between the base case and the cases with modified parameters, for 5 different points on the pipeline (the end of the onshore section, \SI{20}{\kilo\meter} off shore, \SI{300}{\kilo\meter} off shore, and the end of the offshore section). The bars are sorted by descending average error. 
+        Chart of the average relative difference (the hatched bars) and maximum relative difference (the solid bars) in temperature between the base case and the cases with modified parameters, for 5 different points on the pipeline (the end of the onshore section, \SI{20}{\kilo\meter} off shore, \SI{300}{\kilo\meter} off shore, and the end of the offshore section). The bars are sorted by descending average error. 
         Only parameters/points with average relative difference above \SI{0.0036}{\percent} are shown.%
+        % \redtext {fix figure (include average and max in legend), have good description}
         % cut-off at average absolute difference $>0.0371$ C.
         \label{fig:temperatureBarChart}%
     }%

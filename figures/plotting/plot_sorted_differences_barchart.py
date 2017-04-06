@@ -318,11 +318,22 @@ if True:
         artists.append(plt.Rectangle((0,0), 0, 0, facecolor = barcolors[i], edgecolor = None))
         legends.append(l[i])
 
-    artists.append(plt.Rectangle((0,0), 0, 0, facecolor = 'lightgrey', edgecolor = None, hatch = '////'))
+    # artists.append(plt.Rectangle((0,0), 0, 0, facecolor = 'lightgrey', edgecolor = None, hatch = '////'))
     # artists.append(plt.Rectangle((0,0), 0, 0, facecolor = 'none', edgecolor = 'k'))
 
     # Create legend from custom artist/label lists
-    ax.legend(artists, legends + ['Average', 'Max'], loc = 'lower right')
+    # ax.legend(artists, legends + ['Average', 'Max'], loc = 'lower right')
+    leg1 = ax.legend(artists, legends, loc = 'lower left', bbox_to_anchor = [0.59, 0.08])
+
+    # create extra legend for max and average
+    a = []
+    a.append(plt.Rectangle((0,0), 0, 0, facecolor = [0.6]*3, edgecolor = None))
+    a.append(plt.Rectangle((0,0), 0, 0, facecolor = 'lightgrey', edgecolor = None, hatch = '////'))
+    leg2 = plt.legend(a, ['Maximum difference', 'Average difference'], loc = 'lower left', bbox_to_anchor = [0.59, 0])
+
+    # add back the old legend, since this disappears when creating the extra one above
+    ax.add_artist(leg1)
+
 
     fig.tight_layout(pad = 0) # fill figure
     fig.subplots_adjust(left = 0.1) # add some space on left side, so all figures have same size in the end
