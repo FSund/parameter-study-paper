@@ -1,16 +1,17 @@
-Which parameters to include in the sensitivity study were determined by looking at which variables appear in the governing equations (\cref{eq:continuityEquation,eq:momentumEquation,eq:energyEquation}), in addition to other correlations that are used in the simulations. The following 9 parameters are included in the study:
+Which parameters to include in the sensitivity study were determined by looking at which variables appear in the governing equations (\cref{eq:continuityEquation,eq:momentumEquation,eq:energyEquation}), in addition to other correlations that are used in the simulations. The focus was on simplifications and empirical correlations in the models, not on physical parameters like pipe diameter, ambient temperature, etc. %
+The following nine parameters are included in the study:
 \begin{itemize}
     \item the Colebrook-White correlation for the friction factor $f$, \cref{eq:colebrookWhite}
     
     \item the compressibility factor $Z$ and three derivatives: $\eval{\pd{Z}{T}}_p$, $\eval{\pd{Z}{p}}_T$ and $\eval{\pd{Z}{T}}_\rho$, which are all calculated from the equation of state
     
-    \item Nusselt number relations (the Dittus-Boelter equation) for inner and outer film heat transfer coefficients ($h_\text{inner}$ and $h_\text{outer}$), which go into the calculation of the heat transfer between the gas and the surroundings $\Omega$
+    \item Nusselt number relations (the Dittus-Boelter equation and \cref{eq:outerFilm}) for inner and outer film heat transfer coefficients ($h_\text{inner}$ and $h_\text{outer}$), which go into the calculation of the heat transfer between the gas and the surroundings $\Omega$
     
     \item the correlation for heat capacity of the gas at constant volume %
     %(derived from the equation of state) 
     $c_v$
     
-    \item the Lee-Gonzales-Eakin correlation for viscosity of the gas $\mu$ \cite{Lee1966Viscosity}, which mainly enters the simulations via the Reynolds number, $\Reyn = \frac{\rho u D}{\mu}$
+    \item the Lee-Gonzales-Eakin correlation for the viscosity of the gas $\mu$, \cref{eq:LGE}, which mainly enters the simulations via the Reynolds number, $\Reyn = \frac{\rho u D}{\mu}$
  \end{itemize}
 
 % To decide which parameters and relations to include in the sensitivity study we first looked to the governing equations \cref{eq:continuityEquation,eq:momentumEquation,eq:energyEquation}. Obvious choices are the compressibility factor $Z$ and derivatives, the friction factor $f$, the gas heat capacity $c_v$, and the heat transfer $\Omega$, which all appear directly in the partial differential equations. We find that the inner and outer heat transfer coefficients ($h_\text{inner}$ and $h_\text{outer}$) are the most relevant parameters to use to investigate the sensitivtity to changes in the heat transfer. We also include the correlation for viscosity (\redtext{LGE}).

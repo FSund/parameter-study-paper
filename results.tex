@@ -1,12 +1,13 @@
+\subsection{Simulation results}
 % The boundary conditions for the off-shore pipeline were inlet mass flow, outlet pressure, inlet temperature and inlet \co-concentration, see \cref{fig:offshorePipelineBC} for a plot of these. 
 % The pipeline was simulated for a 14 day winter period and a 18 day summer period. 
 % For the heat transfer model, sea bottom temperature and air temperature profiles along the pipeline that were sampled once per day were used as boundary conditions. The ambient sea bottom temperatures are from oceanographic models, and the air temperatures are expected temperatures based on historical measurements. \todo{Plot amb temp? 1 line per day, doable in 1 fig}
 
 
-In \cref{fig:baseCaseWithZ} is a plot of the boundary conditions for the base case, and the results for a simulation where the compressibility factor $Z$ has been increased by \SI{20}{\percent}. 
-
+In \cref{fig:baseCaseWithZ} is a plot of the boundary conditions for the base case, and the results from a simulation where the compressibility factor $Z$ was increased by \SI{20}{\percent}. 
+%
 % The biggest impact is on the inlet pressure, which is increased by up to \SI{7}{\percent}.
-
+%
 %In a simulation of a real pipeline, where measurements of the pressure etc. at the inlet and outlet are available, the pipeline roughness $\epsilon$ would typically have been tuned to match the measured pressure drop \todo{using data from a period of stable operation}. Here we have not tuned the roughness to match the base case pressure drop
 % \begin{figure}[ht]%
 %     \centering%
@@ -16,15 +17,23 @@ In \cref{fig:baseCaseWithZ} is a plot of the boundary conditions for the base ca
 %         \label{fig:baseCaseWithZ}%
 %     }%
 % \end{figure}%
+% \begin{figure}[!ht]%
+%     \centering%
+%     \includegraphics{figures/base_case_with_adjusted_Z_horiz.pdf}%
+%     \caption{%
+%         A plot of the results from the base case, and from a simulation with a modified parameter (the compressibility factor $Z$). The inlet flow rate transient occurs at 2~hours, and the boundary conditions are then kept constant for 104~hours. The constant inlet temperature of \SI{33}{\celsius} is not shown.
+%         \label{fig:baseCaseWithZ}%
+%     }%
+% \end{figure}%
 \begin{figure}[!ht]%
     \centering%
-    \includegraphics{figures/base_case_with_adjusted_Z_horiz.pdf}%
+    \includegraphics{figures/base_case_with_adjusted_Z_horiz-with_diff.pdf}%
     \caption{%
-        A plot of the results from the base case, and from a simulation with a modified parameter (the compressibility factor $Z$). The inlet flow rate transient occurs at 2~hours, and the boundary conditions are then kept constant for 104~hours. The constant inlet temperature of \SI{33}{\celsius} is not shown.
+        A plot of the results from the base case, and from a simulation with a modified parameter (the compressibility factor $Z$). The inlet flow rate transient occurs at 2~hours, and the boundary conditions are then kept constant for 104~hours. The three bottom plots show the difference between the base case and the modified parameter simulation, at respectively the outlet, the inlet and the outlet. The constant inlet temperature of \SI{33}{\celsius} is not shown.
         \label{fig:baseCaseWithZ}%
     }%
 \end{figure}%
-From \cref{fig:baseCaseWithZ} it is clear that the difference between the base case and the cases with a modified parameter vary with time during the transient%
+From the figure it is clear that the difference between the base case and the cases with a modified parameter vary with time during the transient%
 , so to more easily analyze the results, both the time average relative difference
 \begin{align}
     &\overbar{\Delta y_\mathrm{rel}}
@@ -51,9 +60,9 @@ This was calculated for each parameter in the sensitivity study, at every grid p
 %
 % A plot of the maximum and average differences for the compressibility factor $Z$ can be seen in \cref{fig:maxAndAverageDiffForZ}, where the maximum and average mass flow, pressure, and temperature difference is shown for the whole pipeline. 
 %
-A plot of the maximum and average differences as function of position, for all parameters in the study, are shown in \cref{fig:maxAndAverageForAll}, and a list of the average impact on the whole pipeline is given in \cref{tab:averageImpact}. %
+A plot of the maximum and average differences as function of position, for all parameters in the study, are shown in \cref{fig:maxAndAverageForAll}.%, and a list of the average impact on the whole pipeline is given in \cref{tab:averageImpact}. %
 
-From \cref{fig:maxAndAverageForAll} a) and b) it can be seen that the parameters with the highest impact on both mass flow and pressure are the friction factor $f$ and the compressibility factor $Z$. For the mass flow the greatest impact is at the outlet, with a gradual decrease from the inlet to the outlet. For the pressure the situation is reversed. This behaviour is caused by how the simulations are set up, with the inlet mass flow and the outlet pressure as boundary conditions.
+From \cref{fig:maxAndAverageForAll} a) and b) it can be seen that the parameters with the highest impact on both mass flow and pressure are the friction factor $f$ and the compressibility factor $Z$. For the mass flow the greatest impact is at the outlet, with a gradual decrease from the inlet to the outlet. For the pressure the situation is reversed. This behaviour is caused by how the simulations are set up, with the mass flow as boundary condition at the inlet and the pressure as boundary condition at the outlet.
 % All other parameters have %
 % less than \SI{1.3}{\percent} maximum %
 % %(\redtext{1.23 for dZdT|p}) %
@@ -93,6 +102,37 @@ which is respectively 14.3 and 9.6 times higher than the third most important fa
     }%
 \end{figure}%
 
+% \begin{table}[!hb]
+%     \caption{
+%         Table of the average relative difference in mass flow, pressure and temperature, for all parameters in the sensitivity study. 
+%         % \redtext{weighted average using non-uniform grid spacing} %
+%         % For mass flow and pressure the two highest numbers are highlighted in green, and the third-highest in yellow.
+%         \label{tab:averageImpact} %
+%     } %
+%     % \begin{tabular}{lc}
+%     \centering %
+%     % \begin{tabular}{lS}
+%     \begin{tabular}{cccc} %
+%         \toprule
+%         % Parameter & \parbox{3.3cm}{\centering Average \\ difference in \\ mass flow [\si{\percent}]} & \parbox{3.3cm}{\centering Average \\ difference in \\ pressure [\si{\percent}]} & \parbox{3.3cm}{\centering Average \\ difference in temperature [\si{\percent}]} \\
+%         & \multicolumn{3}{c}{Average relative difference} \\ \cmidrule(r){2-4}
+%         \parbox{2.5cm}{\centering Parameter} & Mass flow [\si{\percent}] & Pressure [\si{\percent}] & Temperature [\si{\percent}] \\
+%         \midrule
+%         % output from Python script goes here
+%         % relative temperature
+%         $Z$ & 0.9007 & 2.0722 & 0.0289 \\
+%         $\eval{\partial Z/\partial p}_T$ & 0.2179 & 0.0527 & 0.0084 \\
+%         $\eval{\partial Z/\partial T}_p$ & 0.1859 & 0.0614 & 0.0157 \\
+%         $\eval{\partial Z/\partial T}_\rho$ & 0.1021 & 0.0567 & 0.0454 \\
+%         $h_\mathrm{outer}$ & 0.0171 & 0.0073 & 0.0061 \\
+%         $h_\mathrm{inner}$ & 0.0033 & 0.0015 & 0.0015 \\
+%         $c_v$ (gas) & 0.0881 & 0.0225 & 0.0321 \\
+%         $\mu$ (gas) & 0.0782 & 0.2155 & 0.0027 \\
+%         $f$ & 1.4316 & 3.0885 & 0.0306 \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
+
 \begin{table}[!hb]
     \caption{
         Table of the average relative difference in mass flow, pressure and temperature, for all parameters in the sensitivity study. 
@@ -103,40 +143,40 @@ which is respectively 14.3 and 9.6 times higher than the third most important fa
     % \begin{tabular}{lc}
     \centering %
     % \begin{tabular}{lS}
-    \begin{tabular}{cccc} %
+    \begin{tabular}{cSSS} %
         \toprule
         % Parameter & \parbox{3.3cm}{\centering Average \\ difference in \\ mass flow [\si{\percent}]} & \parbox{3.3cm}{\centering Average \\ difference in \\ pressure [\si{\percent}]} & \parbox{3.3cm}{\centering Average \\ difference in temperature [\si{\percent}]} \\
         & \multicolumn{3}{c}{Average relative difference} \\ \cmidrule(r){2-4}
-        \parbox{2.5cm}{\centering Parameter} & Mass flow [\si{\percent}] & Pressure [\si{\percent}] & Temperature [\si{\percent}] \\
+        \parbox{2.5cm}{\centering Parameter} & \multicolumn{1}{c}{Mass flow [\si{\percent}]} & \multicolumn{1}{c}{Pressure [\si{\percent}]} & \multicolumn{1}{c}{Temperature [\si{\percent}]} \\
         \midrule
         % output from Python script goes here
         % relative temperature
-        $Z$ & 0.9007 & 2.0722 & 0.0289 \\
-        $\eval{\partial Z/\partial p}_T$ & 0.2179 & 0.0527 & 0.0084 \\
-        $\eval{\partial Z/\partial T}_p$ & 0.1859 & 0.0614 & 0.0157 \\
-        $\eval{\partial Z/\partial T}_\rho$ & 0.1021 & 0.0567 & 0.0454 \\
-        $h_\mathrm{outer}$ & 0.0171 & 0.0073 & 0.0061 \\
+        $Z$ & 0.90 & 2.1 & 0.029 \\
+        $\eval{\partial Z/\partial p}_T$ & 0.22 & 0.053 & 0.0084 \\
+        $\eval{\partial Z/\partial T}_p$ & 0.19 & 0.061 & 0.016 \\
+        $\eval{\partial Z/\partial T}_\rho$ & 0.10 & 0.057 & 0.045 \\
+        $h_\mathrm{outer}$ & 0.017 & 0.0073 & 0.0061 \\
         $h_\mathrm{inner}$ & 0.0033 & 0.0015 & 0.0015 \\
-        $c_v$ (gas) & 0.0881 & 0.0225 & 0.0321 \\
-        $\mu$ (gas) & 0.0782 & 0.2155 & 0.0027 \\
-        $f$ & 1.4316 & 3.0885 & 0.0306 \\
+        $c_v$ (gas) & 0.088 & 0.023 & 0.032 \\
+        $\mu$ (gas) & 0.078 & 0.22 & 0.0027 \\
+        $f$ & 1.4 & 3.1 & 0.031 \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 % \input{colored_table.tex}
 
-For the temperature the situation is less clear-cut. From \cref{tab:averageImpact} it is seen that the parameter which gives the highest average difference along the whole pipeline is the derivative of the compressibility factor $\eval{\partial Z/\partial T}_\rho$, with an average difference of \SI{0.045}{\percent}, 1.41~times the impact of the next parameter ($c_v$) and 1.48~times the impact of the third parameter ($f$). The effects on temperature are in general seen to be much smaller than for mass flow and pressure, and there are no parameters that stand out in the same way they for mass flow and pressure
+For the temperature it is seen from \cref{fig:maxAndAverageForAll}~c) that the situation is less clear-cut. From \cref{tab:averageImpact} it is seen that the parameter which gives the highest average difference along the whole pipeline is the derivative of the compressibility factor $\eval{\partial Z/\partial T}_\rho$, with an average difference of \SI{0.045}{\percent}, 1.41~times the impact of the next parameter ($c_v$) and 1.48~times the impact of the third parameter ($f$). The effects on temperature are in general seen to be much smaller than for mass flow and pressure, and there are no parameters that stand out in the same way they for mass flow and pressure
 % . Compared to mass flow and pressure, where the two parameters with the highest impact give a difference of between 4 and 14 times the parameter with the third highest impact, the numbers for the temperature seem to \redtext{vary less}.
 
 In \cref{fig:maxAndAverageForAll} c), peaks in the temperature responses of up to \SI{0.31}{\percent} are observed around \SI{20}{\kilo\meter} off-shore, before the impact of all parameters steadily decrease until they stabilize around \SIrange{100}{200}{\kilo\meter} off-shore. Also, between \SI{125}{\kilo\meter} (\SI{100}{\kilo\meter} off-shore) and landfall at \SI{625}{\kilo\meter}, all parameters have much lower impact than closer to the start of the pipeline; no parameter have a higher maximum impact than \SI{0.15}{\percent} or an average impact of more than \SI{0.06}{\percent}. %
 The stable behaviour in this area is caused by the fixed sea temperature, which acts as a thermal reservoir, so after a long off-shore section the gas comes to a thermal equilibrium with the sea water, and the gas temperature is governed by the ambient temperature.
-% This is because, after being transported offshore for some time, the gas comes to a thermal equilibrium with the ambient sea water. The sea has fixed temperature, and acts as a thermal reservoir, so after a long off-shore section the gas temperature will be governed by the ambient temperature, 
+% This is because, after being transported off-shore for some time, the gas comes to a thermal equilibrium with the ambient sea water. The sea has fixed temperature, and acts as a thermal reservoir, so after a long off-shore section the gas temperature will be governed by the ambient temperature, 
 % and will be independent of any parameters that affect the heat exchange rate between the gas and the ambient (\redtext{as long as the heat exchange rate is different from zero})\todo{what about things like Joule Thompson?, are there other effects??}.
 
 Finally, there is a steady increase in the impact on temperature between landfall and the outlet for most parameters. This is because the boundary condition for the thermal exchange between the gas and the ambient changes at landfall (the pipeline goes from being exposed to sea water to buried under ground), and the thermal equilibrium between the gas and the ambient is disturbed. %Here the parameters that affect the heat exchange, like the inner and outer heat transfer coefficients, will again come into play
 %
-Some details on the temperature response near the outlet can be seen in the inset in \cref{fig:maxAndAverageForAll} d). It is clear that some of the parameters that have very little effect on the temperature while off-shore, like the heat capacity $c_v$ and the derivative of the compressibility factor $\eval{\partial Z/\partial T}_p$, have a much higher effect after going on-shore, and on the final outlet temperature. The impact of the derivative of the compressibility increases from \SI{0.0012}{\percent} at \SI{625}{\kilo\meter} to \SI{0.042}{\percent} at the outlet, a factor of 12.9, and the heat capacity $c_v$ increases from \SI{0.0018}{\percent} at \SI{625}{\kilo\meter} to \SI{0.069}{\percent} at the outlet, a factor of 13.8. The trend in the plot indicates that the impact would be even bigger with a longer on-shore section. In general it is observed that the exposure to the sea seem to reduce the impact of changes in the model parameters on the temperature.
+Some details on the temperature response near the outlet can be seen in the inset in \cref{fig:maxAndAverageForAll} d). It is clear that some of the parameters that have very little effect on the temperature while off-shore, like the heat capacity $c_v$ and the derivative of the compressibility factor $\eval{\partial Z/\partial T}_p$, have a much higher effect after going on-shore, and on the final outlet temperature, even though the final effect is still small. The impact of the derivative of the compressibility increases from \SI{0.0012}{\percent} at \SI{625}{\kilo\meter} to \SI{0.042}{\percent} at the outlet, a factor of 12.9, and the impact of the heat capacity $c_v$ increases from \SI{0.0018}{\percent} at \SI{625}{\kilo\meter} to \SI{0.069}{\percent} at the outlet, a factor of 13.8. The trend in the plot indicates that the impact would be even bigger with a longer on-shore section. In general it is observed that the exposure to the sea seem to reduce the impact of changes in the model parameters on the temperature.
 
 % \begin{figure}[!ht]%
 %     \centering%
@@ -161,7 +201,7 @@ Some details on the temperature response near the outlet can be seen in the inse
 %, like the inlet, the end of the on-shore section etc
 
 To further analyze the temperature responses, the maximum and average temperature differences at certain points of interest along the pipeline are shown in a bar chart in \cref{fig:temperatureBarChart}. %
-It is seen that the heat capacity $c_v$ is the parameter with the highest impact between all the selected points on the pipeline, with the two highest \emph{average} temperature differences (respectively at \SI{20}{\kilo\meter} off-shore, and at the end of the on-shore section), and the highest and third highest \emph{maximum} differences (respectively at \SI{20}{\kilo\meter} off-shore and at the end of the on-shore section). The parameter with the highest impact at \SI{300}{\kilo\meter} offshore is the derivative of the compressibility factor $\partial Z/\partial T\/|_\rho$, while at the end of the off-shore section and at the outlet it is the friction factor $f$.
+It is seen that the heat capacity $c_v$ is the parameter with the highest impact between all the selected points on the pipeline, with the two highest \emph{average} temperature differences (respectively at \SI{20}{\kilo\meter} off-shore, and at the end of the on-shore section), and the highest and third highest \emph{maximum} differences (respectively at \SI{20}{\kilo\meter} off-shore and at the end of the on-shore section). The parameter with the highest impact at \SI{300}{\kilo\meter} off-shore is the derivative of the compressibility factor $\partial Z/\partial T\/|_\rho$, while at the end of the off-shore section and at the outlet it is the friction factor $f$.
 
 % It can be seen that for the first 45 kilometers of the pipeline, the most important
 % parameter is the heat capacity $c_v$, giving an average temperature difference of up to \SI{0.87}{\celsius} (maximum difference of \SI{1.14}{\celsius}). Following this, in descending order of importance are the derivatives of the compressibility %
@@ -177,7 +217,7 @@ It is seen that the heat capacity $c_v$ is the parameter with the highest impact
 %     \centering%
 %     \includegraphics{figures/barchart_all_mass_flow_relative.pdf}%
 %     \caption{%
-%         Chart of the average and maximum relative difference in mass flow between the base case and the cases with modified parameters, for 3 different points on the pipeline (the end of the onshore section, the end of the offshore section, and the outlet). The bars are sorted by descending average error. 
+%         Chart of the average and maximum relative difference in mass flow between the base case and the cases with modified parameters, for 3 different points on the pipeline (the end of the onshore section, the end of the off-shore section, and the outlet). The bars are sorted by descending average error. 
 %         %Only parameters/points with average relative difference above \SI{0.04}{\percent} are shown.%
 %         \label{fig:massFlowBarChart}%
 %     }%
@@ -187,7 +227,7 @@ It is seen that the heat capacity $c_v$ is the parameter with the highest impact
 %     \centering%
 %     \includegraphics{figures/barchart_all_pressure_relative.pdf}%
 %     \caption{%
-%         Chart of the average and maximum relative difference in pressure between the base case and the cases with modified parameters, for 3 different points on the pipeline (the inlet, the end of the onshore section and the end of the offshore section). The bars are sorted by descending average error. 
+%         Chart of the average and maximum relative difference in pressure between the base case and the cases with modified parameters, for 3 different points on the pipeline (the inlet, the end of the onshore section and the end of the off-shore section). The bars are sorted by descending average error. 
 %         %Only parameters/points with average relative difference above \SI{0.04}{\percent} are shown.%
 %         \label{fig:pressureBarChart}%
 %     }%
@@ -197,7 +237,7 @@ It is seen that the heat capacity $c_v$ is the parameter with the highest impact
     \centering%
     \includegraphics{figures/barchart_all_temperature_absolute.pdf}%
     \caption{%
-        Chart of the average relative difference (the hatched bars) and maximum relative difference (the solid bars) in temperature between the base case and the cases with modified parameters, for 5 different points on the pipeline (the end of the onshore section, \SI{20}{\kilo\meter} off shore, \SI{300}{\kilo\meter} off shore, and the end of the offshore section). The bars are sorted by descending average error. 
+        Chart of the average relative difference (the hatched bars) and maximum relative difference (the solid bars) in temperature between the base case and the cases with modified parameters, for 5 different points on the pipeline (the end of the on-shore section, \SI{20}{\kilo\meter} off shore, \SI{300}{\kilo\meter} off shore, and the end of the off-shore section). The bars are sorted by descending average error. 
         Only parameters/points with average relative difference above \SI{0.0036}{\percent} are shown.%
         % \redtext {fix figure (include average and max in legend), have good description}
         % cut-off at average absolute difference $>0.0371$ C.
@@ -222,3 +262,52 @@ It is seen that the heat capacity $c_v$ is the parameter with the highest impact
 %         \label{fig:}%
 %     }%
 % \end{figure}%
+
+\subsection{Comparisons with literature}
+The sensitivity study by Langelandsvik \cite{Langelandsvik2008Modeling} was performed using steady state models, and most of the parameters are hard to relate to the present study. One parameter that is common for both studies is the viscosity. The viscosity was increased by \SI{1}{\percent} by Langelandsvik, which lead to a change in volume flow of \SIrange{0.03}{0.05}{\percent} and no observable change in outlet temperature (less than \SI{0.01}{\celsius} or \SI{0.004}{\percent}). Further, the density was modified by \SI{1}{\percent}, which is equivalent to changing the compressibility factor by \SI{1}{\percent}, since these values are linked via the equation of state
+\begin{align}
+    \frac{p}{\rho} = ZRT \tag{\ref{eq:equationOfState}}
+.
+\end{align}
+The modified density lead to a change in volume flow of \SI{0.50}{\percent} and a change in the outlet temperature of around \SI{0.01}{\celsius} (\SI{0.004}{\percent}). 
+
+These results does not agree that well with the present results. Here a change in the viscosity of \SI{20}{\percent} leads to an average change in mass flow of \SI{0.078}{\percent} and an average change in the outlet temperature of \SI{0.84}{\percent}. Further, a change in the compressibility factor of \SI{20}{\percent} leads to an average change in mass flow of \SI{0.90}{\percent} and an average change in the outlet temperature of \SI{0.84}{\percent}. The effects on temperature are somewhat in agreement, but the effect on the flow rates are not proportional to the changes in the two parameters. This is most likely caused by how the simulations performed by Langelandsvik are set up: the boundary conditions are inlet temperature, inlet pressure and outlet pressure. This means that the pressure drop is fixed, and any impact on pressure observed in the present work would appear as impacts on flow rate in the work by Langelandsvik. 
+
+% viscosity
+% 0.016/47.453*100
+% Out[113]: 0.03371757317767054
+% 0.010/20.584*100
+% Out[112]: 0.04858142246404975
+
+% density
+% 0.235/47.453*100
+% Out[114]: 0.4952268560470359
+% 0.102/20.584*100
+% Out[115]: 0.49553050913330743
+
+The sensitivity study by Helgaker \cite{Helgaker2013Modeling} used a similar simplified pipeline as in the present study, but a different methodology, so the results are not directly comparable. Helgaker used real boundary conditions based on measurement data, but with flow rates, pressures and temperatures in the same range as synthetic transient used in the present study. %
+%
+In the present study, different correlations were modified directly by a constant factor, while Helgaker %
+%
+modified the friction factor by changing the equivalent sand grain pipeline roughness; tested different equations of state; and modified different parameters used by the heat transfer model, like the thermal conductivity and heat capacity of the pipe wall and burial medium, the burial depth, the length of the buried sections, and the ambient temperature. 
+
+Helgaker used sand grain equivalent roughnesses ($\epsilon$ in \cref{eq:colebrookWhite}) of \SIlist{2;3;4}{\micro\meter}, and found no observable difference in outlet mass flow or outlet temperature between the three roughnesses, but a difference in inlet pressure of \SI{0.15}{\mega\pascal} (approximately \SIrange{0.8}{1.0}{\percent}). %
+This contradicts the results from the present study, which shows that the friction factor is important for both mass flow, pressure and temperature. %
+A rough estimate using the Colebrook-White equation shows that a change in the roughness of \SI{1}{\micro\meter} leads to a change in the friction factor in the order of \SI{2}{\percent}, compared to a change in the friction factor of \SI{20}{\percent} used in the present study. This relatively small change in the friction factor used by Helgaker might explain why no difference was observed in the mass flow or temperature. This estimate also shows that the relative effect on pressure when changing the friction factor seems to agree between the two studies, with a change in the friction factor of \SIrange{0.8}{1.0}{\percent} leading to a change in the inlet pressure of approximately \SI{1}{\percent} in the work by Helgaker, and a change in the friction factor of \SI{20}{\percent} leading to a change in the inlet pressure of approximately \SIrange{4.5}{7.2}{\percent} in the present work (see \cref{fig:maxAndAverageForAll}).
+% Helgaker found that there was no observable difference in mass flow or outlet temperature  sand grain equivalent roughness' ($\epsilon$ in \cref{eq:colebrookWhite}) of 2, 3 or \SI{4}{\micro\meter}.
+% changing the sand grain equivalent roughness ($\epsilon$ in \cref{eq:colebrookWhite}) from \SI{3}{\micro\meter} to \SI{2}{\micro\meter} or \SI{4}{\micro\meter} had no observable impact on the mass flow or outlet temperature.
+
+The results of Helgaker for the heat transfer model are hard to compare to the present results, since the physical properties of the pipeline and surroundings were modified, while in the present study the correlations for the inner and outer heat transfer coefficients are modified. This is by design, since the present study sets out to determine where to apply effort when trying to improve the models themselves, not to determine which input to the models that are most important.
+
+Helgaker also looked at the effect of the partial derivatives of $Z$, by setting them all to zero. He found that this had a small impact on the mass flow, but a considerable effect on the pressure during transients. It also had a large impact on the temperature, since setting $\pd{Z}{T}|_p$ to zero effectively removes the Joule-Thompson effect of cooling upon expansion. It is hard to compare these results to the present study, since setting the derivatives to zero is very different from modifying them by a constant factor of \SI{20}{\percent}. But the maximum difference caused by modifying the different derivatives observed in \cref{fig:maxAndAverageForAll} indicate that these parameters are important during transients, which agree with the results of Helgaker.
+
+
+% thermal conductivity of steel, asphalt, concrete and soil
+% heat capacity of ---
+% burial depth
+% length of buried section
+% ambient temperature
+
+
+% \cite{Langelandsvik2008Modeling}
+% \cite{Helgaker2013Modeling}

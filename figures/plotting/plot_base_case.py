@@ -19,6 +19,7 @@ save_figure = True
 import os
 cwd = os.getcwd() # current directory
 os.chdir("D:/VirtualBox VMs/Shared folder/gas_flow")
+from tools import tools
 
 dir = "./projects/sensitivityAnalysis/internalEnergy/newUnsteady/"
 project = "massFlow/"
@@ -42,7 +43,6 @@ dataSet[2][:,1:] += 273.15; # convert temperature to Kelvin
 
 os.chdir(os.path.realpath(cwd)) # change back to original directory
 
-
 ## plot base case -- horizontal
 if True:
     t = baseCaseDataSet[0][:,0]
@@ -54,7 +54,7 @@ if True:
 
     axes = []
 
-    ax1 = fig.add_subplot(131)
+    ax1 = fig.add_subplot(131) # 1 by 3 grid, first ax
     ax2 = fig.add_subplot(132)
     ax3 = fig.add_subplot(133)
     axes.append(ax1);
@@ -91,12 +91,16 @@ if True:
     ax3.plot(t, baseCaseDataSet[2][:,-1] - 273.15, label = "Outlet", color = 'C2')
     ax3.set_ylim([-2.5, 35])
 
-    fig.tight_layout(pad = 0) # fill figure
-    fig.subplots_adjust(top = 0.91, bottom = 0.27) # make room for suptitle and legend
+    # fig.tight_layout(pad = 0) # fill figure
+    fig.tight_layout(pad = 0, w_pad = 0.5, h_pad = 0) # fill figure, move subplots together
+    # fig.subplots_adjust(top = 0.91, bottom = 0.27) # make room for suptitle and legend
+    fig.subplots_adjust(bottom = 0.27) # make room for legend
+
+    ax3.yaxis.set_label_coords(-0.2,0.5) # move temperature y label, since this is so far to the right due to minus signs on y tick labels
 
     # fig.suptitle('Inlet and outlet model values with modified parameter ' + r"$Z^{*} = 1.2 Z$")
     # fig.suptitle('Inlet and outlet results for base case, and with modified parameter ' + r"$Z$")
-    fig.suptitle('Inlet and outlet results for base case, and with modified friction factor')
+    # fig.suptitle('Inlet and outlet results for base case, and with modified friction factor')
     ax2.legend(loc = 'lower center', fontsize = 10, ncol = 3, bbox_to_anchor = [0.5, -0.01], bbox_transform = fig.transFigure)
 
     if True:
@@ -128,6 +132,127 @@ if True:
             # bbox_inches="tight", 
             pad_inches = 0
         )
+
+
+## plot base case -- horizontal
+## with differences
+if True:
+    t = baseCaseDataSet[0][:,0]
+    t = t/(60.0*60.0) # convert to hours
+
+    # figsize = np.array([16, 9])/2.54
+    figsize = np.array([16, 9])/2.54
+    fig = plt.figure(figsize = figsize)
+
+    gs = gridspec.GridSpec(2, 3,
+                       width_ratios=[1,1,1],
+                       height_ratios=[2,1]
+                       )
+
+    # fig = plt.figure()
+    ax4 = plt.subplot(gs[3])
+    ax5 = plt.subplot(gs[4])
+    ax6 = plt.subplot(gs[5])
+    ax1 = plt.subplot(gs[0], sharex = ax4)
+    ax2 = plt.subplot(gs[1], sharex = ax5)
+    ax3 = plt.subplot(gs[2], sharex = ax6)
+
+    axes = []
+    axes.append(ax1);
+    axes.append(ax2);
+    axes.append(ax3);
+
+    ylabels = ["Mass flow [kg/s]", "Pressure [MPa]", u"Temperature [°C]"]
+    for ax, ylabel in zip(axes, ylabels):
+        ax.tick_params(axis = 'y', left = 'on', right = 'off', direction = 'out')
+        ax.tick_params(axis = 'x', bottom = 'off', top = 'off')
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+
+        # ax.xaxis.set_ticklabels([])
+        ax.tick_params(labelbottom = 'off') # hide x tick labels
+
+        # ax.set_ylabel(ylabel)
+        ax.set_title(ylabel, fontsize = 10)
+        # ax.set_xlabel("Time [h]")
+        ax.set_xlim(0, 110)
+
+    # set up grid
+    from matplotlib.ticker import MultipleLocator
+    locator = MultipleLocator(25)
+    for ax in axes:
+        ax.xaxis.set_major_locator(locator)
+        ax.grid()
+
+    l1, = ax1.plot(t, baseCaseDataSet[0][:,1], label = "Inlet")
+    l2, = ax1.plot(t, baseCaseDataSet[0][:,-1], label = "Outlet", color = 'C2')
+    ax1.set_ylim([175, 625])
+
+    ax2.plot(t, baseCaseDataSet[1][:,1], label = "Inlet")
+    ax2.plot(t, baseCaseDataSet[1][:,-1], label = "Outlet", color = 'C2')
+    ax2.set_ylim([9.75, 19.25])
+
+    ax3.plot(t, baseCaseDataSet[2][:,1] - 273.15, label = "Inlet")
+    ax3.plot(t, baseCaseDataSet[2][:,-1] - 273.15, label = "Outlet", color = 'C2')
+    ax3.set_ylim([-2.5, 35])
+
+    # fig.tight_layout(pad = 0) # fill figure
+    # fig.tight_layout(pad = 0, w_pad = 0.5, h_pad = 0) # fill figure, move subplots together
+    # fig.subplots_adjust(top = 0.91, bottom = 0.27) # make room for suptitle and legend
+    fig.subplots_adjust(bottom = 0.27) # make room for legend
+
+    # ax2.legend(loc = 'lower center', fontsize = 10, ncol = 3, bbox_to_anchor = [0.5, -0.01], bbox_transform = fig.transFigure)
+
+    ax3.set_ylim([-1, 2.4])
+
+    adjustedLabel = "Modified parameter"
+    # adjustedLabel = r"$Z^{*} = 1.2 Z$";
+
+    # add adjusted parameter plot (Z factor)
+    l3, = ax1.plot(t, dataSet[0][:,-1], '--', label = adjustedLabel, color = 'C3')
+    ax2.plot(t, dataSet[1][:,1], '--', label = adjustedLabel, color = 'C3')
+    ax2.set_ylim([9.75, 20.5])
+    ax3.plot(t, dataSet[2][:,-1] - 273.15, '--', label = adjustedLabel, color = 'C3')
+
+    # ax2.legend(loc = 'lower center', fontsize = 10, ncol = 3, bbox_to_anchor = [0.5, -0.02], bbox_transform = fig.transFigure) # update legend
+   
+    color = 'C8'
+
+    y = baseCaseDataSet[0][:,-1] - dataSet[0][:,-1]
+    l4, = ax4.plot(t, np.abs(y), color = color)
+
+    y = baseCaseDataSet[1][:,1] - dataSet[1][:,1]
+    ax5.plot(t, np.abs(y), color = color)
+
+    y = baseCaseDataSet[2][:,-1] - dataSet[2][:,-1]
+    ax6.plot(t, np.abs(y), color = color)
+
+
+    for ax in [ax4, ax5, ax6]:
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        # ax.tick_params('y', colors = color)
+        ax.set_xlabel("Time [h]")
+        ax.grid()
+
+    # ax4.set_ylabel('Difference')
+
+    gs.update(hspace = 0.075)
+    gs.update(wspace = 0.3)
+
+    fig.subplots_adjust(left = 0.05, top = 0.945, right = 0.995, bottom = 0.20) # fill figure, make room for legend
+
+    labels = ["Inlet", "Outlet", "Modified parameter", "Difference"]
+    ax2.legend([l1, l2, l3, l4], labels, loc = 'lower center', fontsize = 10, ncol = 4, bbox_to_anchor = [0.5, -0.02], bbox_transform = fig.transFigure) # update legend
+
+    if save_figure:
+        plt.savefig(
+            'base_case_with_adjusted_Z_horiz-with_diff.pdf', 
+            # dpi = 300, 
+            # bbox_inches="tight", 
+            # pad_inches = 0
+        )
+
 
 # if True:
 if False:

@@ -12,7 +12,11 @@
 \newcommand{\inlinetodo}[1]{\todo[inline]{#1}}
 \usepackage[section]{placeins} % forces floats (images) to stay within their section (stops results images from flowing into conclusion)
 \usepackage{siunitx}
-\sisetup{load-configurations = abbreviations, per-mode = symbol}
+\sisetup{%
+    load-configurations = abbreviations, %
+    per-mode = symbol, %
+    % range-phrase = -- %
+}%
 \usepackage{booktabs} % better tables, \hline --> \toprule, \midrule, \bottomrule
 \usepackage{multirow}
 \usepackage{printlen} % to print lengths like \textwidth, \textheight using \printlength{\textwidth}

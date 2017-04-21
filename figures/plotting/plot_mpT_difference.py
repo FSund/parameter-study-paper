@@ -181,7 +181,8 @@ if True:
 
             ax.set_ylim([0, 0.15])
             ax.set_xlim([610, 650])
-
+            
+            from mpl_toolkits.axes_grid1.inset_locator import mark_inset
             mark_inset(axes[2], ax, loc1=1, loc2=3)
 
             for tick in ax.xaxis.get_major_ticks():

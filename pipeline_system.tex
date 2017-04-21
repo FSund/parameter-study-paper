@@ -1,4 +1,4 @@
-A simplified pipeline was modelled, based on typical offshore pipelines that transport gas from Norway to the EU. The simplified pipeline profile is illustrated in \cref{fig:illustrationOfSimplifiedPipeline}, and the pipe wall composition in \cref{fig:pipeCrossSection}.
+A simplified pipeline was modelled, based on typical off-shore pipelines that transport gas from Norway to the EU. The simplified pipeline profile is illustrated in \cref{fig:illustrationOfSimplifiedPipeline}, and the pipe wall composition in \cref{fig:pipeCrossSection}.
 
 % \begin{figure}[ht]%
 %     \centering%
@@ -26,7 +26,7 @@ A simplified pipeline was modelled, based on typical offshore pipelines that tra
     \parbox{0.9\textwidth}{%
         \vspace{2mm}%
         \caption{%
-            Illustration of the simplified pipeline. The pipe is onshore and buried 2~m underground for the first and last 25~km, and 100~m below sea level and exposed to sea water for 600~km between the onshore sections. Figure created freely after figure in \cite{Helgaker2013Modeling}.%
+            Illustration of the simplified pipeline. The pipe is on-shore and buried 2~m underground for the first and last 25~km, and 100~m below sea level and exposed to sea water for 600~km between the on-shore sections. Figure created freely after figure in \cite{Helgaker2013Modeling}.%
             \label{fig:illustrationOfSimplifiedPipeline}%
         }%
     }%
@@ -41,6 +41,9 @@ A simplified pipeline was modelled, based on typical offshore pipelines that tra
 \end{minipage}%
 \end{figure}
 
+The pipeline has an inner diameter of \SI{1}{\meter}, and consists of a steel pipeline, coated with a protective asphalt coating, and an outer concrete shell. The pipeline is on-shore and buried underground for the first \SI{25}{\kilo\meter}. It is then \SI{100}{\meter} below sea level and exposed to sea water for \SI{600}{\kilo\meter}, before it is on-shore and buried for the final \SI{25}{\kilo\meter}.
+
+\subsubsection{Boundary conditions}
 The boundary conditions for the pipeline was constant inlet temperature of \SI{33}{\degreeCelsius}, constant outlet pressure of 10 MPa, and constant air and sea water temperatures of respectively \SI{6}{\degreeCelsius} and \SI{4}{\degreeCelsius}. The system was thermalized with constant inlet mass flow of \SI{600}{\kg\per\second}, and then the mass flow rate was gradually decreased from \SI{600}{\kg\per\second} to \SI{200}{\kg\per\second} in a span of 4 minutes to emulate a transient. The mass flow transient is shown in \cref{fig:massFlowBoundaryCondition}. These conditions correspond to a Reynolds number of 40 to 50 million.
 
 \begin{figure}[ht]%
