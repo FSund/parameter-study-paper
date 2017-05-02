@@ -1,0 +1,108 @@
+\subsection{Governing equations}
+\label{subsec:governingNumerical}
+To solve the non-linear partial differential equations for the three \emph{state variables} mass flow $\dot m$, pressure $p$, and temperature $T$, \crefrange{eq:continuityEquation}{eq:energyEquation} are first discretized using a scheme similar to the BTCS (backward time, centered space) finite difference scheme, using cell averages \cite{Kiuchi1993Implicit,Abbaspour2004Dynamic}. The pipeline is divided into $N$ grid points, and the different variables are approximated at each section between the grid points by
+\begin{align}
+    y \approx \frac{y^{n+1}_{i+1} + y^{n+1}_{i}}{2}
+, \label{eq:variablesScheme}
+\end{align}
+where $y$ represents a general variable, superscripts $n$ and $n+1$ denote time level, and subscripts $i$ and $i+1$ denote grid points. Time derivatives are approximated by
+\begin{align}
+    % \pdt{y} =
+    % \eval{\pdt{y}}_{\substack{x_I\\t_{n+1}}} =
+    % y_t\del{x_I, t_{n+1}} =
+    % \pdt{y}\del{x_I, t_{n+1}} =
+    \pdt{y} \approx 
+    % \pdt{y}\del{t + \Delta t} =
+    \frac{y^{n+1}_{i+1} + y^{n+1}_{i} - \del{y^{n}_{i+1} + y^{n}_{i}}}{2\Delta t}
+, \label{eq:timeScheme}
+\end{align}
+and spatial derivatives by
+\begin{align}
+    \pdx{y} \approx
+    \frac{y^{n+1}_{i+1} - y^{n}_{i}}{\Delta x}
+. \label{eq:spatialScheme}
+\end{align}
+This scheme is first order accurate in time, and second order accurate in space \cite{Kiuchi1993Implicit}.
+
+When replacing \cref{eq:variablesScheme,eq:timeScheme,eq:spatialScheme} in \cref{eq:continuityEquation,eq:momentumEquation,eq:energyEquation} non-linear equations in $\dot m$, $p$ and $T$ are aquired. These equations are linearized by ``lagging'' behind parts of the non-linear terms \cite{thomas1998numerical}
+\begin{align}
+    y^{n+1} \rightarrow y^{n}
+. \label{eq:lagTerms}
+\end{align}
+The result is a set of linear equations, with three equations for each pipe section, and $N-1$ total pipe sections, giving a total of $3(N-1)$ equations. The number of unknowns at time level $n+1$ is $3N$ ($N$ for each state variable), so three boundary conditions are needed. Here the inlet mass flow $\dot m_{1}$, outlet pressure $p_{N}$, and inlet temperature $T_{1}$ are chosen.
+%  equations for .
+%  which are solved using matrix inversion and the Jacobi iterative method. 
+The linear equations with boundary conditions are written on matrix form
+% \begingroup
+% \renewcommand*{\arraystretch}{1.5}
+% \begin{align}
+%     \vec x = 
+%     \begin{bmatrix}
+%         \dot m^{n+1}_{i} \\
+%         \dot m^{n+1}_{i+1} \\
+%         \vdots \\
+%         \dot m^{n+1}_{n-1} \\
+%         \dot m^{n+1}_{n} \\
+%         \dot p^{n+1}_{i} \\
+%         \dot p^{n+1}_{i+1} \\
+%         \vdots \\
+%         \dot p^{n+1}_{n-1} \\
+%         \dot p^{n+1}_{n} \\
+%         \dot T^{n+1}_{i} \\
+%         \dot T^{n+1}_{i+1} \\
+%         \vdots \\
+%         \dot T^{n+1}_{n-1} \\
+%         \dot T^{n+1}_{n}
+%     \end{bmatrix}
+% \end{align}
+% \endgroup
+
+% \begingroup
+% \renewcommand*{\arraystretch}{1.5}
+% \begin{align}
+%     \vec x = 
+%     \begin{bmatrix}
+%         \dot m^{n+1}_2 \\
+%         \dot m^{n+1}_3 \\
+%         \dot m^{n+1}_4 \\
+%         \dot p^{n+1}_1 \\
+%         \dot p^{n+1}_2 \\
+%         \dot p^{n+1}_3 \\
+%         \dot T^{n+1}_2 \\
+%         \dot T^{n+1}_3 \\
+%         \dot T^{n+1}_4
+%     \end{bmatrix}
+% \end{align}
+% \endgroup
+
+\begin{align}
+    \vec A \vec x = \vec b
+, \label{eq:matrixEquation}
+\end{align}
+where the vector $\vec x$ has length $3(N-1)$ and contains the unknowns
+\begin{align}
+    \vec x = 
+    % \begin{bmatrix}
+    %     \dot m^{n+1}_2 & 
+    %     \dots &
+    %     \dot m^{n+1}_N &
+    %     \dot p^{n+1}_1 &
+    %     \dots &
+    %     \dot p^{n+1}_{N-1} &
+    %     \dot T^{n+1}_2 &
+    %     \dots &
+    %     \dot T^{n+1}_N
+    % \end{bmatrix}^{-1}
+    \begin{bmatrix}
+        \dot m^{n+1}_2, \dots, \dot m^{n+1}_N,
+        p^{n+1}_1, \dots, p^{n+1}_{N-1}, 
+        T^{n+1}_2, \dots, T^{n+1}_N
+    \end{bmatrix}^{-1}
+,
+\end{align}
+the matrix $\vec A$ has shape $3(N-1)\oldtimes 3(N-1)$ and contains the coefficients in front of the unknowns, and the vector $\vec b$ contains the known terms including the boundary conditions. \Cref{eq:matrixEquation} is solved using matrix inversion and the Jacobi iterative method \cite{Ferziger2002Computational}. This entails finding $\vec x$ using matrix inversion
+\begin{align}
+    \vec x = \vec A^{-1} \vec b
+,
+\end{align}
+where the inverse $\vec A^{-1}$ is found using a linear algebra library. In the Jacobi iterative method the unknows at time level $n+1$ are given the values from $\vec x$, and terms like the friction factor, compressibility factor etc., are updated using the new mass flow, pressure and temperature. This gives a new set of coefficients $\vec A$ and known terms $\vec b$, and the procedure is repeated until the unknowns converge.

@@ -1,7 +1,7 @@
 The description of the theoretical foundation closely follows the description in \cite{Chaczykowski2017}. 
 
 \subsection{Conservation laws}
-The governing equations for compressible one-dimensional, non-isothermal, transient pipeline gas flow are: \\\\
+The one-dimensional governing equations for compressible, non-isothermal, transient pipeline gas flow are: \\\\
 the \textbf{continuity equation}
 \begin{align}
     \pdt{\rho} + \pdx{(\rho u)} = 0
@@ -17,13 +17,14 @@ and the \textbf{energy equation} \cite{White2006Viscous}
     \rho\del{\pdt{e} + u\pdx{e}} + p\pdx{u} = \frac{f\rho u^3}{2D} + \frac{\Omega}{A_h}
 , \label{eq:enEq}
 \end{align}
-%where $e$ is internal energy per unit mass, $\Omega$ is heat transfer through the pipe wall, and $A_h$ is the area through which the heat is transferred \cite{tt87, oc01, ac08}. 
+where $\rho$ is gas density, $e$ is internal energy, $f$ is the friction factor, $\Omega$ is heat transfer through the pipe wall, and $A_h$ is the area through which the heat is transferred. %
 Using a real gas equation of state
 \begin{align}
     \frac{p}{\rho} = ZRT
+,
 \label{eq:equationOfState}
 \end{align}
-and introducing the mass flow rate $\dot m = \rho u A$, the governing equations are developed into partial differential equations for $p$, $\dot m$ and $T$
+where $Z$ is the compressibility factor, and introducing the mass flow rate $\dot m = \rho u A$, the governing equations are developed into partial differential equations for mass flow $\dot m$, pressure $p$, and temperature $T$
 {\allowdisplaybreaks % amsmath command to allow splitting of equations. Only works for align, not split environment. Use inside {} brackets to only allow for this one equation.
 \begin{align}
     \pdt{p} ={}& 
@@ -66,7 +67,7 @@ and introducing the mass flow rate $\dot m = \rho u A$, the governing equations 
 \end{align}
 }
 
-The resulting non-linear partial differential equations are discretized using the backward-time central space (BTCS) implicit finite difference method, and solved using matrix inversion and the Jacobi iterative method \cite{Ferziger2002Computational}.
+The resulting non-linear partial differential equations are discretized using the cell-centered backward-time centered-space (BTCS) implicit finite difference method \cite{Kiuchi1993Implicit,Abbaspour2004Dynamic}, and solved using matrix inversion and the Jacobi iterative method \cite{Ferziger2002Computational}, as described in further detail in \cref{subsec:governingNumerical}.
 
 \subsection{Closure relations}
 \subsubsection{Heat transfer}
@@ -104,8 +105,8 @@ The \emph{inner} film heat transfer coefficient can be determined from the Dittu
 % $D$ is the inner diameter of the pipe, $k$ is the thermal conductivity of the gas,
 where $\Reyn$ and $\Pran$ is respectively the Reynolds number and the Prandtl number of the gas.
 
-The outer film heat transfer coefficient can be determined from a similar equation, valid for circular cylinders in cross flow with Reynolds numbers between $10^3$ and $2\times 10^5$ %
-%\cite{Bergman2011Fundamentals}\todo{consider changing to eq. 7.52 in Incropera}
+The outer film heat transfer coefficient can be determined from a similar equation, valid for circular cylinders in cross flow with Reynolds numbers between $10^3$ and $2\times 10^5$ \cite{Bergman2011Fundamentals}%
+%\todo{consider changing to eq. 7.52 in Incropera}
 \begin{align}
     \Nuss_\mathrm{D} = 0.26\times\Reyn^{0.6}\Pran^{0.3}
 , \label{eq:outerFilm}
@@ -136,7 +137,7 @@ The parameters $A_0, B_0$, etc. are 11 mixture parameters specific to BWRS, and 
 % \dots, D_0$, $a, \dots, d$, $\alpha$ and $\gamma$ are .
 The set of parameters $A_i$ and $B_i$ used in this study has been especially tuned for the Norwegian gas transport network \cite{Calsep}.
 
-\subsubsection{Other}
+\subsubsection{Friction factor and viscosity}
 The Colebrook-White equation \cite{Colebrook1939Turbulent} is used to calculate the friction factor $f$
 \begin{align}
     \frac{1}{\sqrt{f}} = -2\log \del{\frac{\epsilon}{3.7 D} + \frac{2.51}{\Reyn \sqrt{f}}}
@@ -147,12 +148,14 @@ where $\epsilon$ is the sand grain equivalent roughness of the inner pipeline wa
 
 The Lee-Gonzales-Eakin correlation \cite{Lee1966Viscosity} is used to calculate the viscosity of the gas $\mu$
 \begin{align}
-    \mu = K\exp\del{X\rho^y},
+    \mu = K\exp\del{X\rho^Y},
 \label{eq:LGE}
 \end{align}
 where
 \begin{align}
     K &= \frac{\del{9.4+0.02M} T^{1.5}}{209 + 19 M + T}, \\
     X &= 3.5 + \frac{986}{T} + 0.01 M, \\
-    Y &= 2.4 - 0.2X.
+    Y &= 2.4 - 0.2X
+,
 \end{align}
+and $M$ is the molecular weight of the gas.

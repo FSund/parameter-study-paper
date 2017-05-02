@@ -5,11 +5,13 @@
 \usepackage{csquotes} % required by {babel} (or biblatex?)
 \usepackage[%
     backend=biber,  % biblatex is the package, biber is the (default). The alternative is backend=bibtex, but biber should be better.
-    sorting=nyt,    %
+    % sorting=nyt,    %
+    sorting=none, % in order of citation
 %    style=numeric,  %
     style=numeric-comp,
     %firstinits=true % render all first and middle names as initials
-    giveninits=true
+    giveninits=true,
+    maxbibnames=99 % show all names in bibliography
 ]{biblatex} % Note that "sorting=none" is NOT the same as leaving the field blank, "sorting=none" means "sorting=citeorder".
 % About DATES:
 % The date fields date, origdate, eventdate, and urldate require a date specification in yyyy-mm-dd format. Date ranges are given as yyyy-mm-dd/yyyy-mm-dd. Partial dates are valid provided that date components are omitted at the end only. You may specify an open ended date range by giving the range separator and omitting the end date (e. g., yyyy/).

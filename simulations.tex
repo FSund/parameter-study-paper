@@ -1,11 +1,11 @@
-Which parameters to include in the sensitivity study were determined by looking at which variables appear in the governing equations (\cref{eq:continuityEquation,eq:momentumEquation,eq:energyEquation}), in addition to other correlations that are used in the simulations. The focus was on simplifications and empirical correlations in the models, not on physical parameters like pipe diameter, ambient temperature, etc. %
+Which parameters to include in the sensitivity study were determined by looking at which variables appear in the governing equations (\cref{eq:continuityEquation,eq:momentumEquation,eq:energyEquation}), in addition to other correlations that are used in the simulations. The focus was on simplifications and empirical correlations in the models, not on input parameters like pipe diameter, ambient temperature, etc. %
 The following nine parameters are included in the study:
 \begin{itemize}
     \item the Colebrook-White correlation for the friction factor $f$, \cref{eq:colebrookWhite}
     
     \item the compressibility factor $Z$ and three derivatives: $\eval{\pd{Z}{T}}_p$, $\eval{\pd{Z}{p}}_T$ and $\eval{\pd{Z}{T}}_\rho$, which are all calculated from the equation of state
     
-    \item Nusselt number relations (the Dittus-Boelter equation and \cref{eq:outerFilm}) for inner and outer film heat transfer coefficients ($h_\text{inner}$ and $h_\text{outer}$), which go into the calculation of the heat transfer between the gas and the surroundings $\Omega$
+    \item Nusselt number relations (the Dittus-Boelter equation and \cref{eq:outerFilm}) for inner and outer film heat transfer coefficients, which go into the calculation of the heat transfer between the gas and the surroundings $\Omega$
     
     \item the correlation for heat capacity of the gas at constant volume %
     %(derived from the equation of state) 

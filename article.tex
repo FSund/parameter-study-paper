@@ -29,7 +29,7 @@ e-mail: filip.sund@polytec.no}
 
 \keywords{Computational methods, transient non-isothermal flow, natural gas pipeline, compressible flow, offshore pipeline}
 
-\abstract{\textit{A sensitivity study on a numerical transient flow model for compressible gas was performed to determine the most important parameters when simulating long off-shore gas pipelines. A simplified pipeline was simulated with synthetic transient boundary conditions, while systematically modifying different model parameters and correlations. It was found that, for the mass flow and pressure, the most important parameters by a large margin, are the friction factor and the compressibility factor. For the temperature, the parameter with the highest impact was found to be the derivative of the compressibility factor with respect to temperature (at constant density), closely followed by the gas heat capacity at constant volume and the friction factor.}}
+\abstract{\textit{A sensitivity study on a numerical transient flow model for compressible gas was performed to determine the most important parameters when simulating long off-shore gas pipelines. A simplified pipeline was simulated with synthetic transient boundary conditions, while systematically modifying different model parameters and correlations. It was found that, for the mass flow and pressure, the most important parameters by a large margin, are the friction factor and the compressibility factor. For the temperature, the parameter with the highest impact was found to be the derivative of the compressibility factor with respect to temperature (at constant density), closely followed by the isochoric gas heat capacity and the friction factor.}}
 
 \begin{document}
 % \maketitle
@@ -50,6 +50,10 @@ e-mail: filip.sund@polytec.no}
 \section{THEORY}
 \label{theory}
 \input{theory}
+
+\section{NUMERICAL SCHEME}
+\input{numerical_scheme.tex}
+
 
 % \section{Pipeline system}
 % \section{Simulations (\redtext{?})}
@@ -72,7 +76,7 @@ e-mail: filip.sund@polytec.no}
 \input{conclusions}
 
 \section*{Acknowledgements}
-This work has been funded by the Norwegian gas operating company Gassco as part of a project to improve flow modeling in off-shore natural gas transmission pipelines. 
+This work has been funded by the Norwegian gas operating company Gassco as part of a project to improve flow modeling of off-shore natural gas transmission pipelines. 
 
 \printbibliography
 \end{document}
