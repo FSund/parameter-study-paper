@@ -1,7 +1,7 @@
 The description of the theoretical foundation closely follows the description in \cite{Chaczykowski2017}. 
 
 \subsection{Conservation laws}
-The one-dimensional governing equations for compressible, non-isothermal, transient pipeline gas flow are: \\\\
+The governing equations for compressible, non-isothermal, transient pipeline gas flow are derived by averaging over the cross-section of Reynolds time-averaged conservation laws for viscous flow, resulting in: \\\\
 the \textbf{continuity equation}
 \begin{align}
     \pdt{\rho} + \pdx{(\rho u)} = 0
@@ -17,7 +17,10 @@ and the \textbf{energy equation} \cite{White2006Viscous}
     \rho\del{\pdt{e} + u\pdx{e}} + p\pdx{u} = \frac{f\rho u^3}{2D} + \frac{\Omega}{A_h}
 , \label{eq:enEq}
 \end{align}
-where $\rho$ is gas density, $e$ is internal energy, $f$ is the friction factor, $\Omega$ is heat transfer through the pipe wall, and $A_h$ is the area through which the heat is transferred. %
+where $\rho$ is gas density, $e$ is internal energy, $f$ is the friction factor, $\Omega$ is heat transfer through the pipe wall, and $A_h$ is the area through which the heat is transferred. 
+
+The two terms containing the friction factor $f$ in \cref{eq:momEq,eq:enEq} model viscous dissipation -- the transfer of mechanical energy to thermal energy via viscous stresses, and should account for dissipation at all length scales. It has been shown that a correction factor of up to \SI{10}{\percent} should be applied to the dissipation term in \cref{eq:enEq}, depending on the Reynolds number and pipe roughness \cite{Ytrehus2013Energy}. Additionally, the friction factor is calculated using empirical equations and the \emph{sand grain equivalent roughness}, which is not directly correlated to the physical roughness of the pipe wall \cite{Langelandsvik2008Flow}, so there are some uncertainties regarding the accuracy of these terms and the friction factor itself.
+
 Using a real gas equation of state
 \begin{align}
     \frac{p}{\rho} = ZRT
