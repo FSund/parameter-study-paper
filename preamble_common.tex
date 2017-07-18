@@ -25,26 +25,27 @@
 \usepackage{pbox}
 
 % highlighting
-\usepackage{color} % Must be loaded before soul, for highligting
-\usepackage{soul}
-\usepackage{xcolor}
-\newcommand{\redtext}[1]{\textcolor{red}{#1}}
-% \renewcommand{\hl}[2][yellow]{%
-%     \sethlcolor{#1}%
-%     \hl{#2}%
+% \usepackage{color} % Must be loaded before soul, for highligting
+% \usepackage{soul}
+% \usepackage{xcolor}
+% \newcommand{\redtext}[1]{\textcolor{red}{#1}}
+% % \renewcommand{\hl}[2][yellow]{%
+% %     \sethlcolor{#1}%
+% %     \hl{#2}%
+% % }%
+% \DeclareRobustCommand{\hlg}[1]{%
+%     \sethlcolor{green}%
+%     \hl{#1}%
 % }%
-\DeclareRobustCommand{\hlg}[1]{%
-    \sethlcolor{green}%
-    \hl{#1}%
-}%
-\DeclareRobustCommand{\hly}[1]{%
-    \sethlcolor{yellow}%
-    \hl{#1}%
-}%
-% \newcommand{\greenbox}[1]{\colorbox{green}{#1}}
-% \newcommand{\yellowbox}[1]{\colorbox{yellow}{#1}}
-\newcommand{\greenbox}[1]{\hlg{#1}}
-\newcommand{\yellowbox}[1]{\hly{#1}}
+% \DeclareRobustCommand{\hly}[1]{%
+%     \sethlcolor{yellow}%
+%     \hl{#1}%
+% }%
+% % \newcommand{\greenbox}[1]{\colorbox{green}{#1}}
+% % \newcommand{\yellowbox}[1]{\colorbox{yellow}{#1}}
+% \newcommand{\greenbox}[1]{\hlg{#1}}
+% \newcommand{\yellowbox}[1]{\hly{#1}}
+\usepackage{xcolor}
 
 \usepackage{hyperref}
 \usepackage{cleveref}

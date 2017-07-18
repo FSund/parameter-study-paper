@@ -22,9 +22,7 @@ and spatial derivatives by
     \frac{y^{n+1}_{i+1} - y^{n}_{i}}{\Delta x}
 . \label{eq:spatialScheme}
 \end{align}
-This scheme is first order accurate in time, and second order accurate in space, and have been shown to give accurate results \cite{Abbaspour2008Nonisothermal,Helgaker2014Validation}. 
-
-Central difference schemes are known to be very prone to oscillations, but this problem is avoided by choosing an appropriate time step and grid spacing, and by using smooth transients, and avoiding discontinous changes in boundary conditions \cite{Abbaspour2008Nonisothermal}. A different approach could be using an upwind (backward difference) scheme for the spatial derivatives, but upwind schemes does not take into account acoustic information traveling from points which are downstream \cite{Helgaker2014Transient}, so central differences are preferred.
+This scheme is first order accurate in time, and second order accurate in space, \hlbr{and have been shown to give accurate results for pipelines and boundary conditions comparable to the ones used in the present study \cite{Abbaspour2008Nonisothermal,Helgaker2014Validation}. Central difference schemes are known to be very prone to oscillations, but this problem is avoided by choosing an appropriate time step and grid spacing, and by using smooth transients, avoiding discontinous changes in boundary conditions \cite{Abbaspour2008Nonisothermal}. A different approach could be using an upwind (backward difference) scheme for the spatial derivatives, but upwind schemes do not take into account acoustic information traveling from points which are downstream \cite{Helgaker2014Transient}, so central differences are preferred.}
 
 When replacing \cref{eq:variablesScheme,eq:timeScheme,eq:spatialScheme} in \cref{eq:continuityEquation,eq:momentumEquation,eq:energyEquation} non-linear equations in $\dot m$, $p$ and $T$ are aquired. These equations are linearized by ``lagging'' behind parts of the non-linear terms \cite{thomas1998numerical}
 \begin{align}

@@ -11,8 +11,15 @@
 \addbibresource{remote.bib}
 \addbibresource{bibliography.bib}
 
+% \DeclareRobustCommand{\redtitle}[1]{\textcolor{red}{#1}}
+\DeclareRobustCommand{\redtitle}[1]{#1}
+
+% \newcommand\hlbr[1]{\textcolor{red}{#1}}
+\newcommand\hlbr[1]{#1}
+
 % \title{The relative importance of model parameters in predictive transient models}
-\title{THE RELATIVE IMPORTANCE OF MODEL PARAMETERS IN PREDICTIVE TRANSIENT MODELS}
+% \title{THE RELATIVE IMPORTANCE OF MODEL PARAMETERS IN PREDICTIVE TRANSIENT MODELS}
+\title{THE RELATIVE IMPORTANCE OF MODEL PARAMETERS IN \redtitle{TRANSIENT GAS-PIPELINE FLOW}}
 
 \author{Filip Sund$^{1,2}$}
 
@@ -76,7 +83,7 @@ e-mail: filip.sund@polytec.no}
 \input{conclusions}
 
 \section*{Acknowledgements}
-This work has been funded by the Norwegian gas operating company Gassco as part of a project to improve flow modeling of off-shore natural gas transmission pipelines. 
+This work has been funded by the Norwegian gas operating company Gassco as part of a project to improve flow modeling of off-shore natural gas transmission pipelines. The author would like to thank his advisors Professor Maria Fernandino, Professor Emeritus Tor Ytrehus and Dr. Sigmund Mongstad Hope for helpful advice and fruitful discussions.
 
 \printbibliography
 \end{document}
